@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Biblioteca Pessoal - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <!-- IMAGEM -->
+            <img src="../imagens/img1.png" alt="Logo">
+
+            <!-- BIBLIOTECA PESSOAL -->
+            <span>BIBLIOTECA PESSOAL</span>
+        </div>
+        <!--SOBRE NÓS + BOTÃO LOGIN-->
+        <div class="menuDireita">
+            <a href="#motivos" class="sobreNos">
+                <span>Sobre nós</span>
+            </a>
+
+            <div class="leitura">
+                <a href="#Beneficios" class="Beneficios2">
+                    <span>Impacto da leitura</span>
+                </a>
+
+                <div class="nav">
+                    <button id="btnLogin">Entre</button>
+                </div>
+            </div>
+    </header>
+    <!-- FIM HEADER -->
+
+
+    <!-- SESSÃO PRINCIPAL -->
+    <section class="principal">
+
+
+        <!-- SOBRE + BOTÃO + QUOTES-->
+        <div class="conteudo">
+
+            <!-- TITULO-->
+            <div class="titulo">
+                Organize, descubra <br>e viva histórias.
+            </div>
+
+
+            <!-- DECORAÇÃO-->
+            <div class="decoracao">
+                <span>──── ✦ ────</span>
+            </div>
+            <!-- TEXTO SOBRE O PROJETO-->
+            <div class="sobre">
+                <p>
+                    Organize seus livros, acompanhe seu progresso e transforme a leitura em um hábito de verdade.
+                    Tenha controle sobre tudo o que você lê, descubra novas histórias e mantenha sua constância dia após
+                    dia.
+                    Tudo isso em um só lugar, de forma simples, prática e motivadora.
+                </p>
+
+
+            </div>
+            <!-- BOTÃO -->
+            <div class="botoes">
+                <a href="../tela cadastro/cadastro.html">
+                    <button id="btnCadastro">🕮 Cadastre-se</button>
+                </a>
+            </div>
+
+            <!-- QUOTE DINÂMICO -->
+            <div class="quote">
+                <span class="aspas esquerda">❝</span>
+                <p id="quoteText"></p>
+                <span class="aspas direita">❞</span>
+            </div>
+        </div>
+
+
+        <!-- FIM SEÇÃO PRINCIPAL -->
+    </section>
+
+    <!-- INÍCIO SEÇÃO MOTIVOS-->
+    <section>
+        <section class="motivos" id="motivos">
+            <h2>Porque usar a Biblioteca Pessoal?</h2>
+            <!-- DECORAÇÃO-->
+            <div class="decoracao2">
+                <span>──── ✦ ────</span>
+            </div>
+            <div class="cards">
+                <!--PRIMEIRO CARD -->
+                <div class="card1">
+                    <h3>Dashboard Analítica</h3>
+
+                    <p>Disponibilzação de uma dahsboard com indicadores
+                        sobre seu ritmo de leitura, quantidade livros lidos por mês,
+                        entre outros.</p>
+                </div>
+                <!--SEGUNDO CARD -->
+                <div class="card2">
+                    <h3>Contagem de dias lidos</h3>
+                    <p>Nosso sistema permite que você registre
+                        os dias que leu na semana
+                        para bater sua meta de leitura.</p>
+                </div>
+                <!--TERCEIRO CARD -->
+                <div class="card3">
+                    <h3>Cultivação do hábito da leitura</h3>
+                    <p>Te ajudamos a manter o hábito de explorar novos mundos sem sair do lugar.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!--FIM SEÇÃO MOTIVOS-->
+    </section>
+
+    <!-- NOVA SEÇÃO -->
+    <section>
+
+        <div class="linhaSuave"></div>
+        
+        <section class="Beneficios" id="Beneficios">
+            <h2>O que a leitura muda em você?</h2>
+            <!-- DECORAÇÃO-->
+            <div class="decoracao2">
+                <span>──── ✦ ────</span>
+            </div>
+            <div class="cards">
+                <!--PRIMEIRO CARD -->
+                <div class="card1">
+                    <h3>Expande seu pensamento</h3>
+
+                    <p>A leitura estimula o raciocínio crítico,
+                        amplia perspectivas e desenvolve
+                        a capacidade de interpretar o mundo
+                        de forma mais profunda.</p>
+                </div>
+                <!--SEGUNDO CARD -->
+                <div class="card2">
+                    <h3>Fortalece a imaginação</h3>
+                    <p>Cada história convida você a criar cenários,
+                        personagens e emoções,
+                        desenvolvendo criatividade e sensibilidade.</p>
+                </div>
+                <!--TERCEIRO CARD -->
+                <div class="card3">
+                    <h3>Conecta você a novos mundos</h3>
+                    <p>Por meio dos livros, é possível explorar culturas,
+                        ideias e experiências diferentes
+                        sem sair do lugar.</p>
+                </div>
+            </div>
+
+        </section>
+    </section>
+</body>
+
+</html>
+<script>
+    const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
+        'Leitura, antes de mais nada, é estímulo, é exemplo.',
+        'Um livro é um sonho que você segura na mão.',
+        'Só se vê bem com o coração, o essencial é invisível aos olhos.',
+        'Quando as ilusões somem, só resta a verdade.']
+
+    let i = 0;
+
+    quoteText.innerHTML = `${quotes[i]}`
+
+    setInterval(() => {
+        i++;
+
+        if (i >= quotes.length) {
+            i = 0;
+        }
+
+        quoteText.innerHTML = quotes[i];
+    }, 5000);
+</script>
