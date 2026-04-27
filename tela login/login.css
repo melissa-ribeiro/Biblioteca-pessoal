@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONTE DOS TEXTOS */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/*INÍCIO ESTILIZAÇÃO HEADER*/
+.logo img {
+    width: 80px;
+    height: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header {
+    background-color: #4A338E;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.logo span {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #F8F9FF;
+}
+
+.back button{
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #fff;
+    color: #4A338E;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back button:hover {
+    background-color: #6E5CD6;
+    transform: translateY(-2px);
+}
+
+/* FIM ESTILIZAÇÃO HEADER*/
+
+/*ESTILIZAÇÃO PRINCIPAL*/
+.principal {
+    min-height: 93vh;
+    background: url(../imagens/FundoHome.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+.principal span {
+    display: flex;
+    justify-content: center;
+    color: #4A338E;
+    font-size: 30px;
+    font-weight: 500;
+}
+.container {
+    background-color: #F8F9FF;
+    border-radius: 16px;
+
+    padding: 40px 50px;
+    width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container span {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #4A338E;
+}
+
+.dados {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dados input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dados input:focus {
+    border-color: #8B78E6;
+    box-shadow: 0 0 5px rgba(139, 120, 230, 0.5);
+}
+
+#bntEntrar {
+    margin-top: 0px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #8B78E6;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#bntEntrar:hover {
+    background-color: #6E5CD6;
+    transform: translateY(-2px);
+}
+/*FIM ESTILIZAÇÃO PRINCIPAL*/
+
+/*CADASTRO*/
+.login span {
+    margin: auto;
+    font-size: 13px;
+}
+.login button {
+    margin-top: 15px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 10px;
+}
