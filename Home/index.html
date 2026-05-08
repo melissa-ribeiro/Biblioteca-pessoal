@@ -33,9 +33,12 @@
                 </a>
 
                 <div class="nav">
-                    <button id="btnLogin">Entre</button>
+                   <a href="../tela login/login.html">
+                     <button id="btnLogin">Entre</button>
+                   </a>
                 </div>
             </div>
+        </div>
     </header>
     <!-- FIM HEADER -->
 
@@ -162,6 +165,11 @@
 
         </section>
     </section>
+
+
+    <footer>
+        <p>© 2026 Melissa Ribeiro • Feito com <span style="color: rgb(124, 12, 123);">♡</span></p>
+    </footer>
 </body>
 
 </html>
@@ -169,20 +177,21 @@
     const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
         'Leitura, antes de mais nada, é estímulo, é exemplo.',
         'Um livro é um sonho que você segura na mão.',
-        'Só se vê bem com o coração, o essencial é invisível aos olhos.',
-        'Quando as ilusões somem, só resta a verdade.']
+        'Quem lê, vive mil vidas em uma só.',
+        'Ler é viajar sem sair do lugar.']
 
-    let i = 0;
+    let i = 0
 
-    quoteText.innerHTML = `${quotes[i]}`
+    quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
 
+    /*Quotes dinamicos:*/
     setInterval(() => {
         i++;
 
         if (i >= quotes.length) {
             i = 0;
         }
-
-        quoteText.innerHTML = quotes[i];
-    }, 5000);
+        
+        quoteText.innerHTML = `${quotes[i]}`
+    }, 5000); /*muda os quotes a cada 5 seg*/
 </script>
