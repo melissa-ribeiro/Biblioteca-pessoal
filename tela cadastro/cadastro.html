@@ -38,17 +38,17 @@
                 Crie uma senha: <br>
                 <input id="ipt_senha" type="text" placeholder="Digite uma senha"> <br>
                 Qual sua meta de leitura semanal? <br>
-                <input id="ipt_meta" type="number" placeholder="Digite sua meta"> <br><br>
+                <input id="ipt_meta" type="number" placeholder="Digite sua meta em dias"> <br><br>
 
-                <button id="bntCadastrar" onclick="Cadastrar()">Cadastrar</button>
+                <button onclick="Cadastrar()" id="bntCadastrar">Cadastrar</button>
 
                 <div class="login">
                     <span>Já faz parte?</span>
                     <a href="../tela login/login.html">
                         <span>Entre</span>
                     </a>
-                    
-                        
+
+
                 </div>
 
 
@@ -57,38 +57,50 @@
 
     </div>
 
+
+
 </body>
 
 </html>
 
 <script>
-    cadastro = []
+
     function Cadastrar() {
         let nome = ipt_nome.value.trim()
         let email = ipt_email.value.trim()
         let senha = ipt_senha.value.trim()
-        let meta = Number(ipt_meta.value)
+        let meta = Number(ipt_meta.value)  
 
-        if (nome.length == 0 || nome.length < 3) {
+        if (ipt_nome.value == '' || ipt_email.value == '' || ipt_senha.value == '' || ipt_meta.value == '') {
+            alert("Insira todos os dados solicitados.")
+        } else if (nome.length == 0 || nome.length < 3) {
             alert("Insira seu nome corretamente.")
         } else if (email.length == 0 || email.length < 3 || !email.includes('@')) {
             alert("Insira seu email corretamente.")
         } else if (senha.length < 6) {
             alert("Crie uma senha com 6 digitos ou mais.")
-        } else if (meta <= 0 ) {
+        } else if (meta <= 0 || meta > 7) {
             alert("Insira a quantidade de dias que você quer ler por semana.")
         } else {
-            alert("Cadastro realizado com sucesso!")
-            cadastro.push(nome)
+
+            let cadastro = JSON.parse(localStorage.getItem("cadastro")) || []
+
+            cadastro.push({
+                nome: nome,
+                email:email,
+                senha:senha,
+                meta:meta
+            })
             ipt_nome.value = ''
-            cadastro.push(email)
             ipt_email.value = ''
-            cadastro.push(senha)
             ipt_senha.value = ''
-            cadastro.push(meta)
             ipt_meta.value = ''
 
+            localStorage.setItem("cadastro", JSON.stringify(cadastro))
+            
+            alert("Cadastro realizado com sucesso!")
 
+            window.location.href = "../menu principal/menu.html"
         }
     }
 </script>
