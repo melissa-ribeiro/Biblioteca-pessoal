@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONTE DOS TEXTOS */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/*INÍCIO ESTILIZAÇÃO HEADER*/
+.logo img {
+    width: 80px;
+    height: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/*Sobre nós*/
+html {
+    scroll-behavior: smooth;
+}
+
+.sobreNos span {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.menuDireita {
+    display: flex;
+    align-items: center;
+    gap: 80px; 
+}
+
+.sobreNos:hover {
+    color: #4A338E;
+    transform: translateY(-1px);
+}
+
+
+/*impacto da leitura*/
+
+.Beneficios2 span {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.leitura {
+    display: flex;
+    align-items: center;
+    gap: 100px; 
+}
+
+.Beneficios2:hover {
+    color: #4A338E;
+    transform: translateY(-1px);
+}
+
+
+.header {
+    background-color: #A396E9; 
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2D1B6B;
+}
+
+.logo span {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+#btnLogin {
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4A338E;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#btnLogin:hover {
+    background-color: #6E5CD6;
+    transform: translateY(-2px);
+}
+
+
+/* FIM ESTILIZAÇÃO HEADER*/
