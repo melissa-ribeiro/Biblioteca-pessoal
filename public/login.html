@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BIblioteca Pessoal - Login</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="./css/login.css">
     </head>
 
     <body>
@@ -15,15 +15,15 @@
             <header class="header">
                 <div class="logo">
                     <!-- IMAGEM -->
-                    <img src="../imagens/img1.png" alt="Logo">
+                    <img src="./imagens/img1.png" alt="Logo">
 
                     <!-- BIBLIOTECA PESSOAL -->
                     <span>BIBLIOTECA PESSOAL</span>
                 </div>
                 <!-- BOTÃO VOLTAR -->
                 <div class="back">
-                    <a href="../Home/index.html">
-                        <button>Home</button>
+                    <a href="./index.html">
+                        <button>Início</button>
                     </a>
                 </div>
             </header>
@@ -42,7 +42,7 @@
 
                         <div class="login">
                             <span>Ainda não faz parte?</span>
-                            <a href="../tela cadastro/cadastro.html">
+                            <a href="./cadastro.html">
                                 <span>Cadastre-se</span>
                             </a>
 
@@ -55,50 +55,77 @@
         </body>
 
     </html>
-    <script>
-        let tentativas = 0
 
-        function Login() {
-            let email = ipt_email.value
-            let senha = ipt_senha.value
-            let encontrou = false
-            
+<script>
 
-            if (ipt_email.value == '' || ipt_senha.value == '') {
-                alert("Insira email e senha.")
-            } else if (!email.includes('@')) {
-                alert("Insira o email corretamente.")
-            } else if (senha.length < 6) {
-                alert("Insira a senha corretamente")
-            } else {
-                
-                let cadastro = JSON.parse(localStorage.getItem("cadastro")) || []
 
-                for (let i = 0; i < cadastro.length; i ++){
+    function entrar() {
+        aguardar();
 
-                    if(cadastro[i].email == email && cadastro[i].senha == senha){
-                        encontrou = true
-                        break 
-                    }
-                }
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
 
-                if(encontrou){
-                    alert("Login realizado com sucesso!")
-                    window.location.href = "../menu principal/menu.html"
-
-                    localStorage.setItem("userEncontrado",email)
-                }else {
-
-                    alert("Email ou senha incorretos")
-
-                     tentativas++
-                    if (tentativas >= 3) {
-                    bntEntrar.disabled = true
-                    alert("Você excedeu o limite de tentativas")
-                   
-                } 
-                }
-
-            }
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
         }
-    </script>
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>
