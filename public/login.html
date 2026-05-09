@@ -1,131 +1,123 @@
-    <!DOCTYPE html>
-    <html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BIblioteca Pessoal - Login</title>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/login.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIblioteca Pessoal - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
 
     <body>
+        <header class="header">
+            <div class="logo">
+                <!-- IMAGEM -->
+                <img src="./imagens/img1.png" alt="Logo">
 
-        <body>
-            <header class="header">
-                <div class="logo">
-                    <!-- IMAGEM -->
-                    <img src="./imagens/img1.png" alt="Logo">
+                <!-- BIBLIOTECA PESSOAL -->
+                <span>BIBLIOTECA PESSOAL</span>
+            </div>
+            <!-- BOTÃO VOLTAR -->
+            <div class="back">
+                <a href="./index.html">
+                    <button>Início</button>
+                </a>
+            </div>
+        </header>
 
-                    <!-- BIBLIOTECA PESSOAL -->
-                    <span>BIBLIOTECA PESSOAL</span>
-                </div>
-                <!-- BOTÃO VOLTAR -->
-                <div class="back">
-                    <a href="./index.html">
-                        <button>Início</button>
-                    </a>
-                </div>
-            </header>
+        <div class="principal">
 
-            <div class="principal">
+            <div class="container">
+                <span>Realize seu login:</span>
+                <div class="dados">
+                    Email: <br>
+                    <input id="ipt_email" type="text" placeholder="Digite seu Email"> <br>
+                    Senha: <br>
+                    <input id="ipt_senha" type="text" placeholder="Digite sua senha"> <br>
 
-                <div class="container">
-                    <span>Realize seu login:</span>
-                    <div class="dados">
-                        Email: <br>
-                        <input id="ipt_email" type="text" placeholder="Digite seu Email"> <br>
-                        Senha: <br>
-                        <input id="ipt_senha" type="text" placeholder="Digite sua senha"> <br>
+                    <button id="bntEntrar" onclick="Login()">Entrar</button>
 
-                        <button id="bntEntrar" onclick="Login()">Entrar</button>
-
-                        <div class="login">
-                            <span>Ainda não faz parte?</span>
-                            <a href="./cadastro.html">
-                                <span>Cadastre-se</span>
-                            </a>
-
-
-                        </div>
+                    <div class="login">
+                        <span>Ainda não faz parte?</span>
+                        <a href="./cadastro.html">
+                            <span>Cadastre-se</span>
+                        </a>
 
 
                     </div>
-                </div>
-        </body>
 
-    </html>
+
+                </div>
+            </div>
+    </body>
+
+</html>
 
 <script>
 
 
-    function entrar() {
-        aguardar();
+    function Login() {
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            alert("Preencha todos o campos")
             return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
+
+            console.log("FORM LOGIN: ", emailVar);
+            console.log("FORM SENHA: ", senhaVar);
+
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO Login()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id_usuario;
+
+                        setTimeout(function () {
+                            window.location = "./menu.html"; //ADICIONAR MENU INICIAL
+                        }, 1000); // apenas para exibir o loading
+
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        alert("Email ou senha inválidos");
+                        console.log(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
+
         }
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
     }
 
 </script>
