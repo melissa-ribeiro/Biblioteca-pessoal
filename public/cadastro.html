@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Pessoal - Cadastro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <!-- IMAGEM -->
+            <img src="../imagens/img1.png" alt="Logo">
+
+            <!-- BIBLIOTECA PESSOAL -->
+            <span>BIBLIOTECA PESSOAL</span>
+        </div>
+        <!-- BOTÃO VOLTAR -->
+        <div class="back">
+            <a href="../Home/index.html">
+                <button>Home</button>
+            </a>
+        </div>
+    </header>
+
+    <div class="principal">
+
+        <div class="container">
+            <span>Faça seu cadastro:</span>
+            <div class="dados">
+                Nome: <br>
+                <input id="ipt_nome" type="text" placeholder="Digite seu nome"> <br>
+                Email: <br>
+                <input id="ipt_email" type="text" placeholder="Digite seu Email"> <br>
+                Crie uma senha: <br>
+                <input id="ipt_senha" type="text" placeholder="Digite uma senha"> <br>
+                Qual sua meta de leitura semanal? <br>
+                <input id="ipt_meta" type="number" placeholder="Digite sua meta em dias"> <br><br>
+
+                <button onclick="Cadastrar()" id="bntCadastrar">Cadastrar</button>
+
+                <div class="login">
+                    <span>Já faz parte?</span>
+                    <a href="../tela login/login.html">
+                        <span>Entre</span>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+
+    function Cadastrar() {
+        let nome = ipt_nome.value.trim()
+        let email = ipt_email.value.trim()
+        let senha = ipt_senha.value.trim()
+        let meta = Number(ipt_meta.value)  
+
+        if (ipt_nome.value == '' || ipt_email.value == '' || ipt_senha.value == '' || ipt_meta.value == '') {
+            alert("Insira todos os dados solicitados.")
+        } else if (nome.length == 0 || nome.length < 3) {
+            alert("Insira seu nome corretamente.")
+        } else if (email.length == 0 || email.length < 3 || !email.includes('@')) {
+            alert("Insira seu email corretamente.")
+        } else if (senha.length < 6) {
+            alert("Crie uma senha com 6 digitos ou mais.")
+        } else if (meta <= 0 || meta > 7) {
+            alert("Insira a quantidade de dias que você quer ler por semana.")
+        } else {
+
+            let cadastro = JSON.parse(localStorage.getItem("cadastro")) || []
+
+            cadastro.push({
+                nome: nome,
+                email:email,
+                senha:senha,
+                meta:meta
+            })
+            ipt_nome.value = ''
+            ipt_email.value = ''
+            ipt_senha.value = ''
+            ipt_meta.value = ''
+
+            localStorage.setItem("cadastro", JSON.stringify(cadastro))
+            
+            alert("Cadastro realizado com sucesso!")
+
+            window.location.href = "../menu principal/menu.html"
+        }
+    }
+</script>
