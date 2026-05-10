@@ -115,6 +115,32 @@ body {
     box-shadow: 0 0 5px rgba(139, 120, 230, 0.5);
 }
 
+/*SENHA*/
+.senha-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.senha-container input {
+    flex: 1;
+    width: 100%;
+}
+
+.btn-olho {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #F8F9FF;
+    cursor: pointer;
+    transition: 0.3s;
+    color:rgb(58, 10, 84);
+}
+
+.btn-olho:hover {
+    background-color: #F8F9FF;
+    transform: translateY(-2px);
+}
 #bntEntrar {
     margin-top: 0px;
     padding: 12px;

@@ -10,48 +10,49 @@
 </head>
 
 
-    <body>
-        <header class="header">
-            <div class="logo">
-                <!-- IMAGEM -->
-                <img src="./imagens/img1.png" alt="Logo">
+<body>
+    <header class="header">
+        <div class="logo">
+            <!-- IMAGEM -->
+            <img src="./imagens/img1.png" alt="Logo">
 
-                <!-- BIBLIOTECA PESSOAL -->
-                <span>BIBLIOTECA PESSOAL</span>
+            <!-- BIBLIOTECA PESSOAL -->
+            <span>BIBLIOTECA PESSOAL</span>
+        </div>
+        <!-- BOTÃO VOLTAR -->
+        <div class="back">
+            <a href="./index.html">
+                <button>Início</button>
+            </a>
+        </div>
+    </header>
+
+    <div class="principal">
+
+        <div class="container">
+            <span>Realize seu login:</span>
+            <div class="dados">
+                Email: <br>
+                <input id="ipt_email" type="text" placeholder="Digite seu Email"> <br>
+                Senha: <br>
+                <div class="senha-container">
+                    <input id="ipt_senha" type="password" placeholder="Digite uma senha">
+                    <button type="button" id="btnSenha" class="btn-olho" onclick="mostrarSenha()">
+                        Mostrar
+                    </button> 
+                </div><br>
+
+                <button id="bntEntrar" onclick="Login()">Entrar</button> <br>
             </div>
-            <!-- BOTÃO VOLTAR -->
-            <div class="back">
-                <a href="./index.html">
-                    <button>Início</button>
+            
+
+            <div class="login">
+                <span>Ainda não faz parte?</span>
+                <a href="./cadastro.html">
+                    <span>Cadastre-se</span>
                 </a>
             </div>
-        </header>
-
-        <div class="principal">
-
-            <div class="container">
-                <span>Realize seu login:</span>
-                <div class="dados">
-                    Email: <br>
-                    <input id="ipt_email" type="text" placeholder="Digite seu Email"> <br>
-                    Senha: <br>
-                    <input id="ipt_senha" type="text" placeholder="Digite sua senha"> <br>
-
-                    <button id="bntEntrar" onclick="Login()">Entrar</button>
-
-                    <div class="login">
-                        <span>Ainda não faz parte?</span>
-                        <a href="./cadastro.html">
-                            <span>Cadastre-se</span>
-                        </a>
-
-
-                    </div>
-
-
-                </div>
-            </div>
-    </body>
+</body>
 
 </html>
 
@@ -118,6 +119,20 @@
 
         }
 
+    }
+
+    function mostrarSenha() {
+        if (ipt_senha.type == "password") {
+
+            ipt_senha.type = "text";
+            btnSenha.innerHTML = "Ocultar";
+
+        } else {
+
+            ipt_senha.type = "password";
+            btnSenha.innerHTML = "Mostrar";
+
+        }
     }
 
 </script>
