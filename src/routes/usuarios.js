@@ -8,8 +8,15 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+// LOGIN 
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
+});
+
+
+// ONBOARDING
+router.post("/onboarding", function (req, res) {
+    usuarioController.onboarding(req, res);
 });
 
 module.exports = router;

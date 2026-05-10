@@ -39,12 +39,12 @@
                     <input id="ipt_senha" type="password" placeholder="Digite uma senha">
                     <button type="button" id="btnSenha" class="btn-olho" onclick="mostrarSenha()">
                         Mostrar
-                    </button> 
+                    </button>
                 </div><br>
 
                 <button id="bntEntrar" onclick="Login()">Entrar</button> <br>
             </div>
-            
+
 
             <div class="login">
                 <span>Ainda não faz parte?</span>
@@ -52,6 +52,8 @@
                     <span>Cadastre-se</span>
                 </a>
             </div>
+
+        </div>
 </body>
 
 </html>
@@ -94,9 +96,19 @@
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.id_usuario;
+                        sessionStorage.PRIMEIRO_ACESSO = json.primeiro_acesso;
 
                         setTimeout(function () {
-                            window.location = "./menu.html"; //ADICIONAR MENU INICIAL
+                            if (json.primeiro_acesso == 1) {
+
+                                window.location = "./boasVindas.html";
+
+                            } else {
+
+                                window.location = "./menu.html";
+
+                            }
+
                         }, 1000); // apenas para exibir o loading
 
                     });

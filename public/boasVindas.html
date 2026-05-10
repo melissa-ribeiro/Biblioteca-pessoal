@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Pessoal - Onboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/boasVindas.css">
+</head>
+
+<body>
+    <header class="header">
+
+        <div class="logo">
+
+            <img src="./imagens/img1.png" alt="Logo">
+
+            <span>BIBLIOTECA PESSOAL</span>
+
+        </div>
+
+    </header>
+
+    <div class="principal">
+        <div class="container">
+            <span>Bem-vindo à sua Biblioteca Pessoal</span> <br>
+
+            <p>
+                Antes de começar, personalize sua experiência.
+            </p> <br>
+
+            <div class="dados">
+                Insira como quer ser chamado: <br>
+                <input id="ipt_nickname" type="text" placeholder="Escreva seu apelido">
+
+                Quais são seus pronomes? <br>
+                <select id="slct_pronome">
+                    <option value="">Selecione uma opção</option>
+
+                    <option value="ela/dela" ]>Ela/Dela
+                    </option>
+
+                    <option value="ele/dele">
+                        Ele / Dele
+                    </option>
+
+                    <option value="elu/delu">
+                        Elu / Delu
+                    </option>
+
+                    <option value="prefiro_nao_dizer">
+                        Prefiro não informar
+                    </option>
+                </select>
+
+                Escolha seu avatar:
+
+                <div class="avatares">
+
+                    <img src="./imagens/menina1.png - Editado.png" onclick="selecionarAvatar(1)" id="avatar1">
+
+                    <img src="./imagens/menino1.png - Editado.png" onclick="selecionarAvatar(2)" id="avatar2">
+
+                    <img src="./imagens/menina2.png - Editado.png" onclick="selecionarAvatar(3)" id="avatar3">
+
+                    <img src="./imagens/menino2.png - Editado.png" onclick="selecionarAvatar(4)" id="avatar4">
+
+                    <img src="./imagens/menina3.png - Editado.png" onclick="selecionarAvatar(5)" id="avatar5">
+
+                    <img src="./imagens/menino3.png - Editado.png" onclick="selecionarAvatar(6)" id="avatar6">
+
+                </div>
+                <br>
+                <button type="button" onclick="Continuar()" id="btnEntrar">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var avatarEscolhido = "";
+
+    function selecionarAvatar(numero) {
+
+        avatarEscolhido = numero;
+
+        var avatares = document.querySelectorAll(".avatares img");
+
+        avatares.forEach(function (img) {
+            img.classList.remove("avatar-selecionado");
+        });
+
+        document
+            .getElementById(`avatar${numero}`)
+            .classList.add("avatar-selecionado");
+
+    }
+
+    function Continuar() {
+        var pronome = slct_pronome.value;
+        var nickname = ipt_nickname.value;
+
+        if (pronome == '') {
+
+            alert("Selecione uma opção de pronomes.");
+
+        } else if (nickname == '') {
+
+            alert("Insira um apelido.");
+
+        } else if (avatarEscolhido == '') {
+
+            alert("Escolha um avatar.");
+
+        } else {
+
+            fetch("/usuarios/onboarding", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    nicknameServer: nickname,
+                    pronomeServer: pronome,
+                    avatarServer: avatarEscolhido,
+                    idUsuarioServer: sessionStorage.ID_USUARIO
+
+                })
+
+            })
+                .then(function (resposta) {
+
+                    if (resposta.ok) {
+
+                        window.location = "./menu.html";
+
+                    }
+
+                })
+        }
+    }
+</script>

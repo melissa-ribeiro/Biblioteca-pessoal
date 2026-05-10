@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONTE DOS TEXTOS */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/*INÍCIO ESTILIZAÇÃO HEADER*/
+.logo img {
+    width: 80px;
+    height: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header {
+    background-color: #4A338E;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.logo span {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #F8F9FF;
+}
+
+/* FIM ESTILIZAÇÃO HEADER*/
+
+/*FUNDO DA PÁGINA*/
+.principal {
+    min-height: 93vh;
+    background: url(../imagens/FundoHome.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+/*CONTAINER PRINCIPAL*/
+.container{
+    background-color: #F8F9FF;
+    border-radius: 16px;
+
+    padding: 40px 50px;
+    width: 700px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container span {
+    display: flex;
+    justify-content: center;
+    color: #4A338E;
+    font-size: 30px;
+    font-weight: 700;
+}
+.container p {
+    display: flex;
+    justify-content: center;
+    color: #664aba;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.dados {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dados input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.dados input:focus {
+    border-color: #8B78E6;
+    box-shadow: 0 0 5px rgba(139, 120, 230, 0.5);
+}
+/*AVATAR*/
+.avatares {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.avatares img {
+    width: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 4px solid transparent;
+    height: 100px;
+    object-fit: cover;
+
+}
+
+.avatares img:hover {
+    transform: scale(1.05);
+}
+
+.avatar-selecionado {
+
+    border: 4px solid #381b70;
+    transform: scale(1.08);
+    box-shadow: 0 0 12px rgba(56, 27, 112, 0.5);
+}
+
+/*SELECT OPTION*/
+.dados select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+.dados select:focus {
+    border-color: #8B78E6;
+    box-shadow: 0 0 5px rgba(139, 120, 230, 0.5);
+}
+/*BOTÃO ENTRAR*/
+#btnEntrar {
+    margin-top: -5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #8B78E6;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btnEntrar:hover {
+    background-color: #6E5CD6;
+    transform: translateY(-2px);
+}
