@@ -102,14 +102,40 @@ html {
 
 .principal {
     min-height: 85vh;
-    background: url(../imagens/FundoHome.png);
+    background-image: url(../imagens/FundoHome.png);
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: flex-start; 
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+}
+.custom-shape-divider-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 10;
 }
 
+.custom-shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 100px; /* Você pode aumentar ou diminuir a "altura" da onda aqui */
+}
+
+.custom-shape-divider-bottom .shape-fill {
+    fill:#F8F9FF; /* COR DA SEÇÃO SEGUINTE (Branco) */
+}
 
 .conteudo {
     max-width: 500px;
@@ -124,7 +150,7 @@ html {
     text-align: center;
     color: white;
     font-weight: 400;
-    font-size: 42px;
+    font-size: 50px;
     margin-bottom: 15px;
 
 }
@@ -199,9 +225,11 @@ html {
 /*MOTIVOS*/
 
 .motivos {
+    margin-top: -10px;
     padding: 80px 20px;
     text-align: center;
     background-color: #F8F9FF; 
+  
 }
 
 .motivos h2 {
@@ -210,6 +238,7 @@ html {
     margin-bottom: 60px;
     color: #2b2b2b;
     letter-spacing: 0.5px;
+    margin: 0 0 60px 0;
 }
 
 

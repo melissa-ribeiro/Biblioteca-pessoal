@@ -54,17 +54,20 @@
             </div>
 
         </div>
+    </div>
 </body>
 
 </html>
 
 <script>
 
+    var tentativas = 0;
 
     function Login() {
 
         var emailVar = ipt_email.value;
         var senhaVar = ipt_senha.value;
+
 
         if (emailVar == "" || senhaVar == "") {
             alert("Preencha todos o campos")
@@ -97,6 +100,9 @@
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.id_usuario;
                         sessionStorage.PRIMEIRO_ACESSO = json.primeiro_acesso;
+                        sessionStorage.NICKNAME_USUARIO = json.nickname;
+                        sessionStorage.PRONOME_USUARIO = json.pronome;
+                        sessionStorage.AVATAR_USUARIO = json.avatar;
 
                         setTimeout(function () {
                             if (json.primeiro_acesso == 1) {
@@ -109,42 +115,54 @@
 
                             }
 
-                        }, 1000); // apenas para exibir o loading
+                        });
 
                     });
 
+
                 } else {
+
+                    tentativas++;
 
                     console.log("Houve um erro ao tentar realizar o login!");
 
                     resposta.text().then(texto => {
-                        alert("Email ou senha inválidos");
+
+                        alert(`Email ou senha inválidos! Tentativa ${tentativas}/3`);
                         console.log(texto);
-                    });
+
+                        if (tentativas >= 3) {
+
+                            bntEntrar.disabled = true;
+                            bntEntrar.innerHTML = "Bloqueado";
+
+                            alert("Número máximo de tentativas atingido!");
+                        }
+
+                    }).catch(function (erro) {
+                        console.log(erro);
+                    })
+
+                    return false;
+
                 }
 
-            }).catch(function (erro) {
-                console.log(erro);
-            })
-
-            return false;
-
-        }
-
-    }
+            }); // FECHA O .then DO FETCH
+        } // FECHA O else DO LOGIN
+    } // FECHA A FUNÇÃO Login()
 
     function mostrarSenha() {
-        if (ipt_senha.type == "password") {
+                    if (ipt_senha.type == "password") {
 
-            ipt_senha.type = "text";
-            btnSenha.innerHTML = "Ocultar";
+                        ipt_senha.type = "text";
+                        btnSenha.innerHTML = "Ocultar";
 
-        } else {
+                    } else {
 
-            ipt_senha.type = "password";
-            btnSenha.innerHTML = "Mostrar";
+                        ipt_senha.type = "password";
+                        btnSenha.innerHTML = "Mostrar";
 
-        }
-    }
+                    }
+                }
 
 </script>

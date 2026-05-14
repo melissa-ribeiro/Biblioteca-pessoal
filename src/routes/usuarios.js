@@ -19,4 +19,6 @@ router.post("/onboarding", function (req, res) {
     usuarioController.onboarding(req, res);
 });
 
+
+
 module.exports = router;

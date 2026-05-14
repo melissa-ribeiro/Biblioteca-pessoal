@@ -72,7 +72,7 @@
 
                 </div>
                 <br>
-                <button type="button" onclick="Continuar()" id="btnEntrar">
+                <button type="button" onclick="onboarding()" id="btnEntrar">
                     Continuar
                 </button>
             </div>
@@ -88,9 +88,8 @@
 
         avatarEscolhido = numero;
 
-        var avatares = document.querySelectorAll(".avatares img");
-
-        avatares.forEach(function (img) {
+        var listaAvatares = document.querySelectorAll(".avatares img");
+        listaAvatares.forEach(function (img) {
             img.classList.remove("avatar-selecionado");
         });
 
@@ -100,7 +99,7 @@
 
     }
 
-    function Continuar() {
+    function onboarding() {
         var pronome = slct_pronome.value;
         var nickname = ipt_nickname.value;
 
@@ -118,7 +117,9 @@
 
         } else {
 
-            fetch("/usuarios/onboarding", {
+
+
+            fetch("http://localhost:3333/usuarios/onboarding", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -136,13 +137,29 @@
             })
                 .then(function (resposta) {
 
-                    if (resposta.ok) {
+                        if (resposta.ok) {
 
-                        window.location = "./menu.html";
+                            sessionStorage.PRONOME_USUARIO = pronome;
+                            sessionStorage.NICKNAME_USUARIO = nickname;
+                            sessionStorage.AVATAR_USUARIO = avatarEscolhido;
+                            
 
-                    }
+                            setTimeout(function () {
+                                window.location = "./menu.html";
+                            }, 500);
+
+                        } else {
+
+                            alert("Erro ao salvar onboarding");
+
+                        }
+                    
+
 
                 })
+
+
         }
+
     }
 </script>

@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+}
+
+.container{
+    display: flex;
+}
+
+.sidebar{
+    width: 220px;
+    height: 100vh;
+    background-color: #A396E9;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.conteudo{
+    padding: 30px;
+    width: 100%;
+}
+
+.cards{
+    display: flex;
+    gap: 20px;
+}
+
+.card{
+    background-color: #ececec;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.grafico{
+    margin-top: 40px;
+}
+
+.barra{
+    width: 300px;
+    height: 30px;
+    background-color: #7c5cff;
+    border-radius: 20px;
+}
