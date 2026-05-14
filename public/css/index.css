@@ -130,11 +130,11 @@ html {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
-    height: 100px; /* Você pode aumentar ou diminuir a "altura" da onda aqui */
+    height: 100px; 
 }
 
 .custom-shape-divider-bottom .shape-fill {
-    fill:#F8F9FF; /* COR DA SEÇÃO SEGUINTE (Branco) */
+    fill:#F8F9FF; 
 }
 
 .conteudo {
@@ -243,6 +243,77 @@ html {
 
 
 
+/*INTERAÇÃO*/
+.interacao{
+    display: flex;
+    justify-content: center;
+    margin-top: -10px;
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #F8F9FF; 
+}
+.misteriousbook{
+
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #fff; 
+    border: 1px solid #E0E0E0;
+    padding: 30px; /* Um pouco menos de padding para dar espaço ao conteúdo */
+    border-radius: 20px;
+    width: 350px; /* Aumentei levemente para o texto não ficar muito espremido */
+    min-height: 400px; /* Mantém o tamanho mesmo quando a imagem some */
+    transition: all 0.4s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.misteriousbook:hover{
+    border-color: #8B78E6;
+    box-shadow: 0 0 5px rgba(135, 118, 218, 0.5);
+    transform: translateY(-4px) scale(1.03);
+}
+#presente {
+    width: 220px;
+}
+#presente:hover {
+    transform: scale(1.1) rotate(5deg); /* Efeito de balanço ao passar o mouse */
+}
+.misteriousbook span {
+    margin-bottom: 15px;
+    color: #6E00B3;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/*MENSAGEM*/
+#book {
+    display: none; /* Controlado pelo seu JS */
+    width: 100%;   /* Ocupa a largura total do card branco */
+    text-align: center;
+    animation: aparecerSuave 0.6s ease;
+}
+#book h2 {
+    color: #4A338E;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#book h3 {
+    color: #8B78E6;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+#book p {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.5;
+}
+/*FIM INTERAÇÃO*/
+
 /*SEPARAÇÃO*/
 .linhaSuave {
     width: 100%;
@@ -257,6 +328,7 @@ html {
     text-align: center;
     background-color: #F8F9FF; 
 }
+
 
 .Beneficios h2 {
     font-size: 36px;

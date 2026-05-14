@@ -1,148 +1,160 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+    <!DOCTYPE html>
+    <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/index.css">
-    <title>Biblioteca Pessoal - Página Inicial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/index.css">
+        <title>Biblioteca Pessoal - Página Inicial</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 
-</head>
+    </head>
 
-<body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="logo">
-            <!-- IMAGEM -->
-            <img src="./imagens/img1.png" alt="Logo">
+    <body>
+        <!-- HEADER -->
+        <header class="header">
+            <div class="logo">
+                <!-- IMAGEM -->
+                <img src="./imagens/img1.png" alt="Logo">
 
-            <!-- BIBLIOTECA PESSOAL -->
-            <span>BIBLIOTECA PESSOAL</span>
-        </div>
-        <!--SOBRE NÓS + BOTÃO LOGIN-->
-        <div class="menuDireita">
-            <a href="#motivos" class="sobreNos">
-                <span>Sobre nós</span>
-            </a>
-
-            <div class="leitura">
-                <a href="#Beneficios" class="Beneficios2">
-                    <span>Impacto da leitura</span>
+                <!-- BIBLIOTECA PESSOAL -->
+                <span>BIBLIOTECA PESSOAL</span>
+            </div>
+            <!--SOBRE NÓS + BOTÃO LOGIN-->
+            <div class="menuDireita">
+                <a href="#motivos" class="sobreNos">
+                    <span>Sobre nós</span>
                 </a>
 
-                <div class="nav">
-                    <a href="./login.html">
-                        <button id="btnLogin">Entre</button>
+                <div class="leitura">
+                    <a href="#Beneficios" class="Beneficios2">
+                        <span>Impacto da leitura</span>
                     </a>
+
+                    <div class="nav">
+                        <a href="./login.html">
+                            <button id="btnLogin">Entre</button>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <!-- FIM HEADER -->
+        </header>
+        <!-- FIM HEADER -->
 
 
-    <!-- SESSÃO PRINCIPAL -->
-    <section class="principal">
+        <!-- SESSÃO PRINCIPAL -->
+        <section class="principal">
 
 
-        <!-- SOBRE + BOTÃO + QUOTES-->
-        <div class="conteudo">
+            <!-- SOBRE + BOTÃO + QUOTES-->
+            <div class="conteudo">
 
-            <!-- TITULO-->
-            <div class="titulo">
-                Organize, descubra <br>e viva histórias.
+                <!-- TITULO-->
+                <div class="titulo">
+                    Organize, descubra <br>e viva histórias.
+                </div>
+
+
+                <!-- DECORAÇÃO-->
+                <div class="decoracao">
+                    <span>──── ✦ ────</span>
+                </div>
+                <!-- TEXTO SOBRE O PROJETO-->
+                <div class="sobre">
+                    <p>
+                        Organize seus livros, acompanhe seu progresso e transforme a leitura em um hábito de verdade.
+                        Tenha controle sobre tudo o que você lê, descubra novas histórias e mantenha sua constância dia após
+                        dia.
+                        Tudo isso em um só lugar, de forma simples, prática e motivadora.
+                    </p>
+
+
+                </div>
+                <!-- BOTÃO -->
+                <div class="botoes">
+                    <a href="./cadastro.html">
+                        <button id="btnCadastro">🕮 Cadastre-se</button>
+                    </a>
+                </div>
+
+                <!-- QUOTE DINÂMICO -->
+                <div class="quote">
+                    <span class="aspas esquerda">❝</span>
+                    <p id="quoteText"></p>
+                    <span class="aspas direita">❞</span>
+                </div>
+            </div>
+
+            <div class="custom-shape-divider-bottom">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                    <path
+                        d="M0 0v99.7C62 69 122.4 48.7 205 66c83.8 17.6 160.5 20.4 240-12 54-22 110-26 173-10a392.2 392.2 0 0 0 222-5c55-17 110.3-36.9 160-27.2V0H0Z"
+                        fill="#ffffff" opacity="0.5"></path>
+                    <path
+                        d="M0 0v74.7C62 44 122.4 28.7 205 46c83.8 17.6 160.5 25.4 240-7 54-22 110-21 173-5 76.5 19.4 146.5 23.3 222 0 55-17 110.3-31.9 160-22.2V0H0Z"
+                        fill="#F8F9FF"></path>
+                </svg>
             </div>
 
 
+
+            <!-- FIM SEÇÃO PRINCIPAL -->
+        </section>
+
+        <!-- INÍCIO SEÇÃO MOTIVOS-->
+
+        <section class="motivos" id="motivos">
+            <h2>Porque usar a Biblioteca Pessoal?</h2>
             <!-- DECORAÇÃO-->
-            <div class="decoracao">
+            <div class="decoracao2">
                 <span>──── ✦ ────</span>
             </div>
-            <!-- TEXTO SOBRE O PROJETO-->
-            <div class="sobre">
-                <p>
-                    Organize seus livros, acompanhe seu progresso e transforme a leitura em um hábito de verdade.
-                    Tenha controle sobre tudo o que você lê, descubra novas histórias e mantenha sua constância dia após
-                    dia.
-                    Tudo isso em um só lugar, de forma simples, prática e motivadora.
-                </p>
+            <div class="cards">
+                <!--PRIMEIRO CARD -->
+                <div class="card1">
+                    <h3>Dashboard Analítica</h3>
 
-
+                    <p>Disponibilzação de uma dahsboard com indicadores
+                        sobre seu ritmo de leitura, quantidade livros lidos por mês,
+                        entre outros.</p>
+                </div>
+                <!--SEGUNDO CARD -->
+                <div class="card2">
+                    <h3>Sua leitura, do seu jeito</h3>
+                    <p>Você pode manter seus livros e informações organizados em um único lugar,
+                        facilitando o controle do seu acervo pessoal de leitura.</p>
+                </div>
+                <!--TERCEIRO CARD -->
+                <div class="card3">
+                    <h3>Cultivação do hábito da leitura</h3>
+                    <p>Te ajudamos a manter o hábito de explorar novos mundos sem sair do lugar.</p>
+                </div>
             </div>
-            <!-- BOTÃO -->
-            <div class="botoes">
-                <a href="./cadastro.html">
-                    <button id="btnCadastro">🕮 Cadastre-se</button>
-                </a>
-            </div>
 
-            <!-- QUOTE DINÂMICO -->
-            <div class="quote">
-                <span class="aspas esquerda">❝</span>
-                <p id="quoteText"></p>
-                <span class="aspas direita">❞</span>
-            </div>
-        </div>
+        </section>
 
-        <div class="custom-shape-divider-bottom">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                <path
-                    d="M0 0v99.7C62 69 122.4 48.7 205 66c83.8 17.6 160.5 20.4 240-12 54-22 110-26 173-10a392.2 392.2 0 0 0 222-5c55-17 110.3-36.9 160-27.2V0H0Z"
-                    fill="#ffffff" opacity="0.5"></path>
-                <path
-                    d="M0 0v74.7C62 44 122.4 28.7 205 46c83.8 17.6 160.5 25.4 240-7 54-22 110-21 173-5 76.5 19.4 146.5 23.3 222 0 55-17 110.3-31.9 160-22.2V0H0Z"
-                    fill="#F8F9FF"></path>
-            </svg>
-
-        </div>
-
-
-
-        <!-- FIM SEÇÃO PRINCIPAL -->
-    </section>
-
-    <!-- INÍCIO SEÇÃO MOTIVOS-->
-
-    <section class="motivos" id="motivos">
-        <h2>Porque usar a Biblioteca Pessoal?</h2>
-        <!-- DECORAÇÃO-->
-        <div class="decoracao2">
-            <span>──── ✦ ────</span>
-        </div>
-        <div class="cards">
-            <!--PRIMEIRO CARD -->
-            <div class="card1">
-                <h3>Dashboard Analítica</h3>
-
-                <p>Disponibilzação de uma dahsboard com indicadores
-                    sobre seu ritmo de leitura, quantidade livros lidos por mês,
-                    entre outros.</p>
-            </div>
-            <!--SEGUNDO CARD -->
-            <div class="card2">
-                <h3>Sua leitura, do seu jeito</h3>
-                <p>Você pode manter seus livros e informações organizados em um único lugar,
-                    facilitando o controle do seu acervo pessoal de leitura.</p>
-            </div>
-            <!--TERCEIRO CARD -->
-            <div class="card3">
-                <h3>Cultivação do hábito da leitura</h3>
-                <p>Te ajudamos a manter o hábito de explorar novos mundos sem sair do lugar.</p>
-            </div>
-        </div>
-
-    </section>
-
-    <!--FIM SEÇÃO MOTIVOS-->
-
-
-    <!-- NOVA SEÇÃO -->
-
+        <!--FIM SEÇÃO MOTIVOS-->
 
         <div class="linhaSuave"></div>
 
+        <!--SEÇÃO INTERAÇÃO-->
+        <section class="interacao">
+            <div class="misteriousbook">
+                <span>Descobra a sua próxima leitura:</span> <br>
+                <img src="./imagens/presente.png" id="presente" alt="presente" onclick="Aleatorio()">
+
+                <div id="book" style="display: none;">
+                </div>
+
+
+
+            </div>
+        </section>
+        <!-- FIM SEÇÃO INTERAÇÃO-->
+
+        <div class="linhaSuave"></div>
+        <!-- NOVA SEÇÃO -->
         <section class="Beneficios" id="Beneficios">
             <h2>O que a leitura muda em você?</h2>
             <!-- DECORAÇÃO-->
@@ -180,31 +192,93 @@
 
 
 
-    <footer>
-        <p>© 2026 Melissa Ribeiro • Feito com <span style="color: rgb(124, 12, 123);">♡</span></p>
-    </footer>
-</body>
+        <footer>
+            <p>© 2026 Melissa Ribeiro • Feito com <span style="color: rgb(124, 12, 123);">♡</span></p>
+        </footer>
+    </body>
 
-</html>
-<script>
-    const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
-        'Leitura, antes de mais nada, é estímulo, é exemplo.',
-        'Um livro é um sonho que você segura na mão.',
-        'Quem lê, vive mil vidas em uma só.',
-        'Ler é viajar sem sair do lugar.']
+    </html>
+    <script>
+        const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
+            'Leitura, antes de mais nada, é estímulo, é exemplo.',
+            'Um livro é um sonho que você segura na mão.',
+            'Quem lê, vive mil vidas em uma só.',
+            'Ler é viajar sem sair do lugar.']
 
-    let i = 0
+        let i = 0
 
-    quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
+        quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
 
-    /*Quotes dinamicos:*/
-    setInterval(() => {
-        i++;
+        /*Quotes dinamicos:*/
+        setInterval(() => {
+            i++;
 
-        if (i >= quotes.length) {
-            i = 0;
+            if (i >= quotes.length) {
+                i = 0;
+            }
+
+            quoteText.innerHTML = `${quotes[i]}`
+        }, 5000); /*muda os quotes a cada 5 seg*/
+
+
+        const books = [
+            {
+                titulo: 'A Passa-Espelhos',
+                autor: 'Christelle Dabos',
+                desc: 'Em um mundo dividido em arcas flutuantes,<br>Ophélie possui o poder de ler objetos e atravessar espelhos.<br>Forçada a um noivado misterioso, ela mergulha em intrigas políticas,<br>segredos antigos e uma atmosfera mágica absurdamente viciante.'
+            },
+
+            {
+                titulo: 'Caraval',
+                autor: 'Stephanie Garber',
+                desc: 'Duas irmãs entram em um espetáculo mágico<br>onde nada é realmente o que parece.<br>Mistério, romance e jogos perigosos se misturam<br>em uma fantasia cheia de ilusões.'
+            },
+
+            {
+                titulo: '1984',
+                autor: 'George Orwell',
+                desc: 'Em um mundo onde cada passo é observado<br>e até pensar pode ser um crime,<br>Winston começa a desafiar o sistema.<br>Mas em uma sociedade que controla a verdade,<br>até a esperança pode ser perigosa.'
+            },
+
+            {
+                titulo: 'Jogos Vorazes',
+                autor: 'Suzanne Collins',
+                desc: 'Todos os anos, jovens são enviados<br>para uma arena mortal enquanto o país inteiro assiste.<br>Quando Katniss entra no jogo,<br>ela descobre que sobreviver pode ser<br>ainda mais difícil do que lutar.'
+            },
+
+            {
+                titulo: 'O Jardim Secreto',
+                autor: 'Frances Hodgson Burnett',
+                desc: 'Ao encontrar um jardim escondido e abandonado,<br>Mary começa a desvendar segredos<br>que mudam não apenas a mansão onde vive,<br>mas também quem ela é.'
+            },
+
+            {
+                titulo: 'Admirável Mundo Novo',
+                autor: 'Aldous Huxley',
+                desc: 'Nessa sociedade perfeita,<br>ninguém sofre, ninguém questiona e todos obedecem.<br>Mas quando algumas pessoas começam a enxergar<br>além dessa felicidade artificial,<br>tudo pode desmoronar.'
+            }
+        ]
+
+        const img = document.getElementById('presente');
+        const msg = document.getElementById('book');
+
+        img.addEventListener('click', function () {
+            if (book.style.display == 'none' || book.style.display == '') {
+                book.style.display = 'block';
+                presente.style.display = 'none';
+            } else {
+                book.style.display = 'none';
+                
+            }
+        })
+
+        function Aleatorio() {
+            var aleatorio = Math.floor(Math.random() * books.length);
+            var livro = books[aleatorio];
+
+            book.innerHTML = `<h2>${livro.titulo}</h2>
+            <h3>${livro.autor}</h3>
+            <p>${livro.desc}</p>`
+
         }
-
-        quoteText.innerHTML = `${quotes[i]}`
-    }, 5000); /*muda os quotes a cada 5 seg*/
-</script>
+    </script>
