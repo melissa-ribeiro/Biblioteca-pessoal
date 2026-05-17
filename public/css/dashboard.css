@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F8F9FF;
+    color: #333333;
+    overflow-x: hidden;
+}
+
+/* Estrutura principal dividindo lateral do conteúdo */
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+/* INICÍCIO ESTLIZAÇÃO MENU LATERAL*/
+.sidebar {
+    width: 240px;
+    background-color: #A396E9;
+    padding: 40px 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 50px;
+    line-height: 1.2;
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar a {
+    display: block;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.LogOut {
+    margin-top: auto;
+}
+/*FIM ESTLIZAÇÃO MENU LATERAL*/
+
+/* INÍCIO ESTILIZAÇÃO CONTEÚDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/*MENSAGEM BOAS VINDAS*/
+
+.boasvindas {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.boasvindas span {
+    font-weight: 600;
+    font-size: 30px;
+    color: #4A338E;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  
+}
+/* AVATAR REDONDO */
+#avatarUsuario {
+    border-radius: 50%;
+    border: 3px solid #A396E9;
+    padding: 5px;
+    object-fit: cover;
+}
+
+/* Container dos KPIs */
+.containerkpi {
+    width: 100%;
+}
+
+.kpis {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap; 
+}
+/*FIM ESTILIZAÇÃO BOAS VINDAS*/
+
+/* Estilo individual de cada Card de KPI */
+.kpi {
+    flex: 1;
+    min-width: 160px;
+    background-color: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(163, 150, 233, 0.08); /* Sombra leve purpurada */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.3s ease;
+}
+
+.kpi:hover {
+    transform: translateY(-4px);
+}
+
+.kpi_titulo {
+    font-size: 13px;
+    color: #8E8E93;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.kpi_valor {
+    font-size: 32px;
+    color: #2C2C2E;
+    font-weight: 600;
+}
+
+/* KPI em destaque*/
+.kpi_destaque {
+    background: linear-gradient(135deg, #A396E9, #8575E0);
+}
+
+.kpi_destaque .kpi_titulo {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.kpi_destaque .kpi_valor {
+    color: white;
+}
+
+/* ==================== SEÇÃO DE GRÁFICOS ==================== */
+.charts-container {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    align-items: stretch;
+    flex: 1;
+}
+
+/* Card base dos gráficos */
+.grafico {
+    background-color: white;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(163, 150, 233, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Ajuste de proporção: Linha ocupa mais espaço que a Pizza */
+.line-chart {
+    flex: 1.8;
+}
+
+.pizza-chart {
+    flex: 1.2;
+}
+
+.grafico_titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2C2C2E;
+}
+
+/* Wrapper para segurar o tamanho correto dos Canvas do Chart.js */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 280px; /* Impede que o gráfico fique esmagado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*FOOTER*/
+.main-content footer {
+    padding: 7px;
+    width: 100%;
+    text-align: center;
+    background-color:#dcd7f8;
+    font-size: 14px;
+    margin-top: auto;
+    margin-bottom: -40px;
+    margin-left: -40px;
+    margin-right: -40px;
+    width: calc(100% + 80px);
+}

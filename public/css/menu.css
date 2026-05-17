@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f3ff 0%, #e9e5ff 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-principal {
+    flex: 1; 
+}
+/* HEADER */
+.header {
+    background-color: #A396E9;
+    padding: 15px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2D1B6B;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    width: 60px;
+    height: auto;
+}
+
+.logo span {
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+#btnSair {
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4A338E;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btnSair:hover {
+    background-color: #6E5CD6;
+    transform: translateY(-2px);
+}
+
+/* MENSAGEM DE BOAS VINDAS */
+.boasVindas {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.boasVindas span {
+    font-weight: 600;
+    font-size: 40px;
+    color: #4A338E;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* CARDS DE ÍCONES */
+.icones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 80px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.CardIcon {
+    background-color: #ffffff;
+    border-radius: 25px;
+    width: 400px; 
+    height: 420px;
+    box-shadow: 0 10px 20px rgba(74, 51, 142, 0.1);
+     transition: transform 0.3s ease, box-shadow 0.9s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 2px solid transparent;
+}
+
+.CardIcon:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(74, 51, 142, 0.2);
+    border-color: #A396E9;
+
+}
+
+/*ESTILIZAÇÃO IMAGENS*/
+.CardIcon img {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+/* AVATAR REDONDO */
+#avatarUsuario {
+    border-radius: 50%;
+    border: 3px solid #A396E9;
+    padding: 5px;
+    object-fit: cover;
+}
+
+.CardIcon span {
+    color: #4A338E;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/*FOOTER*/
+footer {
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    background-color:#dcd7f8;
+    font-size: 14px;
+}

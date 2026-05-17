@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca Pessoal - Cadastro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/cadastro.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <!-- IMAGEM -->
+      <img src="./imagens/img1.png" alt="Logo">
+
+      <!-- BIBLIOTECA PESSOAL -->
+      <span>BIBLIOTECA PESSOAL</span>
+    </div>
+    <!-- BOTÃO VOLTAR -->
+    <div class="back">
+      <a href="./index.html">
+        <button>Início</button>
+      </a>
+    </div>
+  </header>
+
+  <div class="principal">
+
+    <div class="container">
+      <span>Faça seu cadastro:</span>
+      <div class="dados">
+        Nome: <br>
+        <input id="ipt_nome" type="text" placeholder="Digite seu nome"> <br>
+
+        Email: <br>
+        <input id="ipt_email" type="email" placeholder="Digite seu Email"> <br>
+
+        Crie uma senha:<br>
+        <div class="senha-container">
+          <input id="ipt_senha" type="password" placeholder="Digite uma senha">
+          <button type="button" id="btnSenha" class="btn-olho" onclick="mostrarSenha()">
+            Mostrar
+          </button>
+        </div> 
+
+        Confirme sua senha:
+        <div class="Confirmarsenha-container">
+          <input id="ipt_confirmarsenha" type="password" placeholder="Confirme sua senha">
+          <button type="button" id="btnConfSenha" class="btn-olho" onclick="mostrarSenha2()">
+          Mostrar
+          </button>  <br>
+
+        <button onclick="Cadastrar()" id="bntCadastrar">Cadastrar</button> <br><br>
+
+      </div>
+      <div class="login">
+        <span>Já faz parte?</span>
+        <a href="./login.html">
+          <span>Entre</span>
+        </a>
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+  </div>
+
+
+</body>
+
+</html>
+<script>
+
+
+  function Cadastrar() {
+
+   
+    var nomeVar = ipt_nome.value;
+    var emailVar = ipt_email.value;
+    var senhaVar = ipt_senha.value;
+
+
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" 
+
+    ) {
+
+      alert("Preencha todos os campos corretamente!");
+    } else if (
+      nomeVar.length == 0 || nomeVar.length < 3
+    ) {
+
+      alert("Insira seu nome corretamente.")
+
+    } else if (
+      emailVar.length == 0 || emailVar.length < 3 || !emailVar.includes('@')
+    ) {
+
+      alert("Insira seu email corretamente.")
+    } else if (
+      senhaVar.length < 6
+    ) {
+
+      alert("Crie uma senha com 6 digitos ou mais.")
+    }  else {
+
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+         
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+
+
+            alert("Cadastro realizado com sucesso!");
+
+            setTimeout(() => {
+              window.location = "./login.html";
+            }, "2000");
+
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          alert(resposta);
+
+        });
+
+      return false;
+    }
+  }
+
+  function mostrarSenha() {
+    if (ipt_senha.type == "password") {
+
+        ipt_senha.type = "text";
+        btnSenha.innerHTML = "Ocultar";
+
+    } else {
+
+        ipt_senha.type = "password";
+        btnSenha.innerHTML = "Mostrar";
+
+    }
+  }
+
+  function mostrarSenha2() {
+    if (ipt_confirmarsenha.type == "password") {
+
+        ipt_confirmarsenha.type = "text";
+        btnConfSenha.innerHTML = "Ocultar";
+
+    } else {
+
+        ipt_confirmarsenha.type = "password";
+        btnConfSenha.innerHTML = "Mostrar";
+
+    }
+  }
+
+</script>

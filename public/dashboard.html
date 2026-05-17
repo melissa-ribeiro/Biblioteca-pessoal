@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Pessoal - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <div class="sidebar">
+            <h2>Biblioteca<br>Pessoal</h2>
+            <div class="sidebar-links">
+                <a href="./menu.html" class="active">Menu inicial</a>
+                <a href="">Meus Livros</a>
+                <a href="">Meu Perfil</a>
+            </div>
+            <a class="LogOut" href="./login.html">Logout</a>
+        </div>
+
+        <div class="main-content">
+
+            <div class="boasvindas">
+                <img id="avatarUsuario" src="" alt="Avatar">
+                <span>Bem vindo à sua Dashboard, fulano!</span>
+            </div>
+
+            <div class="containerkpi">
+                <div class="kpis">
+
+                    <div class="kpi kpi_destaque">
+                        <p class="kpi_titulo">Livros lidos</p>
+                        <h2 class="kpi_valor">12</h2>
+                    </div>
+
+                    <div class="kpi">
+                        <p class="kpi_titulo">Livros em andamento</p>
+                        <h2 class="kpi_valor">2</h2>
+                    </div>
+
+                    <div class="kpi">
+                        <p class="kpi_titulo">Páginas lidas</p>
+                        <h2 class="kpi_valor">13.000</h2>
+                    </div>
+
+                    <div class="kpi">
+                        <p class="kpi_titulo">Total favoritados</p>
+                        <h2 class="kpi_valor">5</h2>
+                    </div>
+
+                    <div class="kpi">
+                        <p class="kpi_titulo">Lidos do mês</p>
+                        <h2 class="kpi_valor">5</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-container">
+
+                <div class="grafico line-chart">
+                    <div class="grafico_titulo">Livros lidos por mês</div>
+                    <div class="canvas-wrapper">
+                        <canvas id="Lidospormes"></canvas>
+                    </div>
+                </div>
+
+                <div class="grafico pizza-chart">
+                    <div class="grafico_titulo">Gêneros mais lidos</div>
+                    <div class="canvas-wrapper">
+                        <canvas id="generoslidos"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <p style="color: rgb(53, 7, 53);">© 2026 Melissa Ribeiro • Feito com <span
+                        style="color: rgb(124, 12, 123);">♡</span></p>
+            </footer>
+            
+        </div>
+    </div>
+
+</body>
+
+</html>
