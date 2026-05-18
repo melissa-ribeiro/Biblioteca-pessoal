@@ -27,7 +27,7 @@
 
             <div class="boasvindas">
                 <img id="avatarUsuario" src="" alt="Avatar">
-                <span>Bem vindo à sua Dashboard, fulano!</span>
+                <span id="mensagemBoasVindas"></span>
             </div>
 
             <div class="containerkpi">
@@ -81,10 +81,45 @@
                 <p style="color: rgb(53, 7, 53);">© 2026 Melissa Ribeiro • Feito com <span
                         style="color: rgb(124, 12, 123);">♡</span></p>
             </footer>
-            
+
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/dashboard.js"></script>
 </body>
 
 </html>
+<script>
+    var nickname = sessionStorage.NICKNAME_USUARIO;
+    var pronome = sessionStorage.PRONOME_USUARIO;
+    var avatarId = sessionStorage.AVATAR_USUARIO;
+    var caminhoFinal = ''
+
+    if (avatarId == 1) {
+        caminhoFinal = "./imagens/menina1.png - Editado.png"
+    } else if (avatarId == 2) {
+        caminhoFinal = "./imagens/menino1.png - Editado.png"
+    } else if (avatarId == 3) {
+        caminhoFinal = "./imagens/menina2.png - Editado.png"
+    } else if (avatarId == 4) {
+        caminhoFinal = "./imagens/menino2.png - Editado.png"
+    } else if (avatarId == 5) {
+        caminhoFinal = "./imagens/menina3.png - Editado.png"
+    } else if (avatarId == 6) {
+        caminhoFinal = "./imagens/menino3.png - Editado.png"
+    }
+
+    avatarUsuario.src = caminhoFinal;
+    console.log("Apelido:", nickname);
+    console.log("ID do Avatar:", avatarId);
+    console.log("Caminho gerado:", caminhoFinal);
+
+    if (pronome == 'ela/dela') {
+        mensagemBoasVindas.innerHTML = `Seja bem-vinda, ${nickname}!`;
+    } else if (pronome == 'ele/dele') {
+        mensagemBoasVindas.innerHTML = `Seja bem-vindo, ${nickname}!`;
+    } else {
+        mensagemBoasVindas.innerHTML = `Boas-vindas, ${nickname}!`;
+    }
+
+ </script>

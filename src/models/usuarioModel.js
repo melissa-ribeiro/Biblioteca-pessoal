@@ -24,8 +24,6 @@ function cadastrar(nome, email, senha) {
     console.log("SENHA RECEBIDA NO MODEL:", senha);
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucaoSql = `
         INSERT INTO usuario (nome,email, senha) VALUES ('${nome}','${email}',  sha2('${senha}', 256));
     `;
@@ -48,7 +46,7 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
 
     return database.executar(instrucaoUpdate).then(() => {
         // SELECT PARA RETORNAR DADOS ATUALIZADOS
-    var instrucaoSelect = `
+        var instrucaoSelect = `
     SELECT nickname,
     pronome,
     avatar
@@ -62,8 +60,36 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
 
 }
 
+//GRÁFICOS
+function buscarGenerosMaisLidos(idUsuario) {
+    var instrucaoSql = `
+    SELECT genero, COUNT(*) AS quantidade
+    FROM livros
+    JOIN usuario 
+    ON id_usuario = usuario_id
+    WHERE usuario_id = ${idUsuario}
+    GROUP BY genero;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function buscarLivrosLidosMes(idUsuario) {
+    var instrucaoSql = `
+    SELECT MONTH(data_conclusao) AS mes, COUNT(*) AS quantidade
+    FROM livros
+    WHERE usuario_id = ${idUsuario}
+    AND status_leitura = 'concluido'
+    GROUP BY MONTH(data_conclusao)
+    ORDER BY mes;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    onboarding
+    onboarding,
+    buscarGenerosMaisLidos,
+    buscarLivrosLidosMes
 };

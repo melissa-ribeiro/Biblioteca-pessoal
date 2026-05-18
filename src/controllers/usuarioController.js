@@ -12,7 +12,7 @@ function autenticar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
 
-    } 
+    }
     else {
 
         usuarioModel.autenticar(email, senha)
@@ -131,8 +131,43 @@ function onboarding(req, res) {
     }
 }
 
+
+function buscarGenerosMaisLidos(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    usuarioModel.buscarGenerosMaisLidos(idUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function buscarLivrosLidosMes(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    usuarioModel.buscarLivrosLidosMes(idUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    onboarding
+    onboarding,
+    buscarGenerosMaisLidos,
+    buscarLivrosLidosMes
 }

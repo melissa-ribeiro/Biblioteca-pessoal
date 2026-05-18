@@ -19,6 +19,14 @@ router.post("/onboarding", function (req, res) {
     usuarioController.onboarding(req, res);
 });
 
+// BUSCAR GENEROS LIDOS DO USUÁRIO
+router.get("/generos/:idUsuario", function (req, res) {
+    usuarioController.buscarGenerosMaisLidos(req, res);
+})
 
+// BUSCAR LIVROS LIDOS POR MES DO USUÁRIO
+router.get("/lidosMes/:idUsuario", function(req,res) {
+    usuarioController.buscarLivrosLidosMes(req,res)
+})
 
 module.exports = router;
