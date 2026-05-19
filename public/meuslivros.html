@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Pessoal - Meus Livros</title>
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="./css/meuslivros.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/meuslivros.css">
 </head>
+
 <body>
-     <div class="dashboard-layout">
+    <div class="dashboard-layout">
 
         <div class="sidebar">
             <h2>Biblioteca<br>Pessoal</h2>
@@ -23,27 +25,60 @@
 
         <div class="main-content">
 
-             <div class="boasvindas">
+            <div class="boasvindas">
                 <img id="avatarUsuario" src="" alt="Avatar">
                 <span id="mensagemBoasVindas"></span>
             </div>
 
-            <div class="cabecalho2">
-                <input id="ipt_buscarLivros" type="text" placeholder="Pesquisar livros..."> 
-                <button onclick="Cadastrar()">+ Cadastrar novo livro</button>
+            <div class="cabecalho1">
+                <input id="ipt_buscarLivros" type="text" placeholder="Pesquisar livros..."> <button id="lupa" onclick="Pesquisar()">🔎︎</button>
+                <button id="pesquisar" onclick="Cadastrar()">+ Novo Livro</button>
             </div>
-            
+
             <div class="container-livros">
-                
+                <table class="tabela-livros">
+                    <thead>
+                        <tr>
+                            <th>Favorito</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Gênero</th>
+                            <th>Páginas</th>
+                            <th>Status</th>
+                            <th>Avaliação</th>
+                            <th>Data Conclusão</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="conteudo-tabela">
+                        <tr>
+                            <td>★</td>
+                            <td>O Senhor dos Anéis</td>
+                            <td>J.R.R. Tolkien</td>
+                            <td>Fantasia</td>
+                            <td>1200</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td>Editar / Excluir</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-     </div>
+
+            <footer>
+                © 2026 Melissa Ribeiro • Feito com ♡
+            </footer>
+        </div>
 </body>
+
 </html>
 <script>
     var nickname = sessionStorage.NICKNAME_USUARIO;
     var pronome = sessionStorage.PRONOME_USUARIO;
     var avatarId = sessionStorage.AVATAR_USUARIO;
     var caminhoFinal = ''
+    var pesquisarLivros = ipt_buscarLivros.value
 
     if (avatarId == 1) {
         caminhoFinal = "./imagens/menina1.png - Editado.png"
@@ -71,4 +106,6 @@
     } else {
         mensagemBoasVindas.innerHTML = `Boas-vindas aos seus livros, ${nickname}!`;
     }
+
+
 </script>
