@@ -141,11 +141,11 @@ function preencherKpis() {
                     console.log("KPIs:", dadosDoBanco);
 
                     var kpis = dadosDoBanco[0];
+                    console.log("lidos_mes:", kpis.lidos_mes);
 
-                   
                     document.getElementById('kpi_livrosLidos').textContent = kpis.livros_lidos;
                     document.getElementById('kpi_livrosLendo').textContent = kpis.livros_lendo;
-                    document.getElementById('kpi_paginasLidas').textContent = kpis.total_paginas_lidas;
+                    document.getElementById('kpi_paginasLidas').textContent = Number(kpis.total_paginas_lidas).toLocaleString('pt-BR');
                     document.getElementById('kpi_favoritos').textContent = kpis.livros_favoritos;
                     document.getElementById('kpi_LidosMes').textContent = kpis.lidos_mes;
                 }
