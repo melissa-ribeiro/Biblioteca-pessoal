@@ -8,7 +8,7 @@ function plotarGraficoLinha() {
 
     fetch(`/usuarios/lidosMes/${idUsuario}`)
         .then(function (resposta) {
-             console.log("Status da resposta:", resposta.status);
+            console.log("Status da resposta:", resposta.status);
             if (resposta.ok) {
                 resposta.json().then(function (dadosDoBanco) {
                     console.log("Dados que vieram do Banco:", dadosDoBanco);
@@ -49,7 +49,7 @@ function plotarGraficoLinha() {
                                     beginAtZero: true,
                                     ticks: {
                                         stepSize: 1,
-                                        precision: 0 
+                                        precision: 0
                                     }
                                 }
                             }
@@ -126,8 +126,41 @@ function plotarGraficoPizza() {
         });
 }
 
+function preencherKpis() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    if (!idUsuario) {
+        console.error("ID do usuário não foi encontrado no sessionStorage!");
+        return;
+    }
+
+    fetch(`/usuarios/kpis/${idUsuario}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (dadosDoBanco) {
+                    console.log("KPIs:", dadosDoBanco);
+
+                    var kpis = dadosDoBanco[0];
+
+                   
+                    document.getElementById('kpi_livrosLidos').textContent = kpis.livros_lidos;
+                    document.getElementById('kpi_livrosLendo').textContent = kpis.livros_lendo;
+                    document.getElementById('kpi_paginasLidas').textContent = kpis.total_paginas_lidas;
+                    document.getElementById('kpi_favoritos').textContent = kpis.livros_favoritos;
+                    document.getElementById('kpi_LidosMes').textContent = kpis.lidos_mes;
+                }
+                )
+            }
+        }
+        )
+
+
+}
+
 // Executa as funções dinâmicas assim que a página carregar
 window.onload = function () {
     plotarGraficoPizza();
     plotarGraficoLinha();
+    preencherKpis();
 };
+

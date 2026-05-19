@@ -29,4 +29,9 @@ router.get("/lidosMes/:idUsuario", function(req,res) {
     usuarioController.buscarLivrosLidosMes(req,res)
 })
 
+//BUSCAR KPIs
+router.get("/kpis/:idUsuario", function(req,res) {
+    usuarioController.buscarKpis(req,res)
+})  
+
 module.exports = router;

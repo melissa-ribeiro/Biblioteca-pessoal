@@ -85,11 +85,20 @@ function buscarLivrosLidosMes(idUsuario) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
+//KPIs
+function buscarKpis(idUsuario) {
+    var instrucaoSql = `
+        SELECT * FROM vw_kpis
+        WHERE usuario_id = ${idUsuario};
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 module.exports = {
     autenticar,
     cadastrar,
     onboarding,
     buscarGenerosMaisLidos,
-    buscarLivrosLidosMes
+    buscarLivrosLidosMes,
+    buscarKpis
 };
