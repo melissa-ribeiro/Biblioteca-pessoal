@@ -167,7 +167,11 @@ body {
     padding: 10px;
     box-shadow: 0 8px 24px rgba(163, 150, 233, 0.05);
     overflow-x: auto;
-    border: 1px solid #EBF0FF; 
+    border: 1px solid #EBF0FF;
+    max-height: 500px;
+    overflow-y: auto;
+    /* ATIVA A ROLAGEM VERTICAL*/
+    overflow-x: auto;
 }
 
 .tabela-livros {
@@ -176,24 +180,93 @@ body {
     text-align: left;
 }
 
-.tabela-livros th {
-    padding: 16px 14px;
-    font-size: 15px;
-    font-weight: 600;
-
+.tabela-livros thead {
+    background-color: #E2DCF9;
+    top: 0;
+    position: sticky;
+    /*CABEÇALHO FIXO*/
+    z-index: 1;
+    /*CABEÇALHO POR CIMA DA ROLAGEM*/
 }
-.tabela-livros th:first-child { border-radius: 12px 0 0 12px; }
-.tabela-livros th:last-child { border-radius: 0 12px 12px 0; }
+
+.tabela-livros th {
+    padding: 18px 14px;
+    font-size: 1Spx;
+    font-weight: 600;
+    color: #4A338E;
+}
+
+.tabela-livros th:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.tabela-livros th:last-child {
+    border-radius: 0 12px 12px 0;
+}
 
 .tabela-livros td {
-    padding: 18px 14px;
+    padding: 20px 14px;
     color: #4A4A4A;
-    font-size: 15px;
+    font-size: 16px;
     border-bottom: 1px solid #F3F2FD;
     vertical-align: middle;
 }
 
-.col-favorito { color: #4A338E; font-size: 18px; text-align: center; }
-.col-titulo { font-weight: 500; color: #1A1A1A; }
-.col-estrelas { color: #FBBF24; letter-spacing: 2px; }
-.col-acoes { cursor: pointer; letter-spacing: 8px; font-size: 16px; }
+.col-favorito {
+    color: #4A338E;
+    font-size: 18px;
+    text-align: center;
+}
+
+.col-titulo {
+    font-weight: 500;
+    color: #1A1A1A;
+}
+
+.col-estrelas {
+    color: #FBBF24;
+    letter-spacing: 2px;
+}
+
+.col-acoes {
+    cursor: pointer;
+    letter-spacing: 8px;
+    font-size: 16px;
+}
+
+.tabela-livros tbody tr:nth-child(even) { /*Even = pares*/
+    background-color: #F8F9FF;
+    /* Cor cinza claro nas linhas pares */
+}
+
+.tabela-livros tbody tr:nth-child(odd) { /*Odd = ímpares*/
+    background-color: #FFFFFF;
+    /* Cor branca nas linhas ímpares */
+}
+
+#btnedit, #btndelete {
+    margin-top: 0px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    color: rgb(130, 27, 181);
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: transparent;
+    
+}
+#btnedit:hover, #btndelete:hover {
+    transform: translateY(-2px);
+}
+/* FOOTER */
+.main-content footer {
+    padding: 14px;
+    width: calc(100% + 80px);
+    margin-left: -40px;
+    margin-right: -40px;
+    margin-top: auto;
+    text-align: center;
+    background-color: #dcd7f8;
+    font-size: 14px;
+}

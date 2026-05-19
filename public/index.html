@@ -215,9 +215,9 @@
         'Leitura, antes de mais nada, é estímulo, é exemplo.',
         'Um livro é um sonho que você segura na mão.',
         'Quem lê, vive mil vidas em uma só.',
-        'Ler é viajar sem sair do lugar.']
+        'Ler é viajar sem sair do lugar.']  /*Vetor com frases*/
 
-    let i = 0
+    let i = 0 /*Variável para ler o vetor*/
 
     quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
 
@@ -269,10 +269,10 @@
             autor: 'Aldous Huxley',
             desc: 'Nessa sociedade perfeita,<br>ninguém sofre, ninguém questiona e todos obedecem.<br>Mas quando algumas pessoas começam a enxergar<br>além dessa felicidade artificial,<br>tudo pode desmoronar.'
         }
-    ]
+    ] // JSON com título, autor e dscrição dos livros
 
-    const img = document.getElementById('presente');
-    const msg = document.getElementById('book');
+    const img = document.getElementById('presente'); // Variável para imagem do presente
+    const msg = document.getElementById('book'); // Variável para imagem do livro aberto
 
     img.addEventListener('click', function () {
         if (book.style.display == 'none' || book.style.display == '') {
@@ -285,8 +285,9 @@
     })
 
     function Aleatorio() {
-        var aleatorio = Math.floor(Math.random() * books.length);
-        var livro = books[aleatorio];
+        var aleatorio = Math.floor(Math.random() * books.length); /*Fórmula para gerar números inteiros aleatórios
+                                                                 de acordo com a quantidade de ocorrências do vetor*/
+        var livro = books[aleatorio]; 
 
         book.innerHTML = `<h2>${livro.titulo}</h2>
             <h3>${livro.autor}</h3>
@@ -315,7 +316,7 @@
             texto = "Abra o portal! Suas leituras de hoje envolvem dragões, reinos distantes e magias proibidas. ✨";
         }
 
-        campoMensagem.innerHTML = texto;
+        campoMensagem.innerHTML = texto; // Mostra mensagem
     }
 
 
@@ -326,9 +327,10 @@
             "Tsundoku: O termo japonês para o hábito de comprar livros e deixá-los acumulados sem ler.",
             "O livro mais longo do mundo tem mais de 13 mil páginas!",
             "Ler reduz o estresse em até 68%, segundo estudos."
-        ];
+        ]; // vetor com fatos sobre leitura
 
-        let sorteio = Math.floor(Math.random() * fatos.length);
+        let sorteio = Math.floor(Math.random() * fatos.length); /* Função para gerar números aleatórios de acordo com
+                                                                  as ocorrências do vetor*/      
 
         document.getElementById('res-fato').innerHTML = fatos[sorteio];
         document.getElementById('lampada').style.display = 'none';

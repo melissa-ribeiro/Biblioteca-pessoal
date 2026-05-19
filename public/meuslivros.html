@@ -16,7 +16,6 @@
             <h2>Biblioteca<br>Pessoal</h2>
             <div class="sidebar-links">
                 <a href="./menu.html" class="active">Menu inicial</a>
-                <a href="">Meus Livros</a>
                 <a href="">Meu Perfil</a>
                 <a href="./dashboard.html">Dashboard</a>
             </div>
@@ -38,7 +37,7 @@
             <div class="container-livros">
                 <table class="tabela-livros">
                     <thead>
-                        <tr>
+                        <tr> <!-- cabeçalho da minha tabela-->
                             <th>Favorito</th>
                             <th>Título</th>
                             <th>Autor</th>
@@ -50,7 +49,7 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="conteudo-tabela">
+                    <tbody id="conteudo-tabela"> <!--dados da tabela - sem cabeçalho-->
                         <tr>
                             <td>★</td>
                             <td>O Senhor dos Anéis</td>
@@ -60,7 +59,103 @@
                             <td>Concluído</td>
                             <td>★★★★★</td>
                             <td>18/05/2026</td>
-                            <td>Editar / Excluir</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                           <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                           <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
+                        </tr>
+
+                         <tr>
+                            <td>★</td>
+                            <td>Coraline</td>
+                            <td>Neil Gaiman</td>
+                            <td>Fantasia</td>
+                            <td>130</td>
+                            <td>Concluído</td>
+                            <td>★★★★★</td>
+                            <td>18/05/2026</td>
+                            <td><button id="btnedit" onclick="Editar()">Editar</button> / <button id="btndelete" onclick="Excluir()">Excluir</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,7 +173,8 @@
     var pronome = sessionStorage.PRONOME_USUARIO;
     var avatarId = sessionStorage.AVATAR_USUARIO;
     var caminhoFinal = ''
-    var pesquisarLivros = ipt_buscarLivros.value
+
+
 
     if (avatarId == 1) {
         caminhoFinal = "./imagens/menina1.png - Editado.png"
@@ -108,4 +204,5 @@
     }
 
 
+    const livros = []
 </script>
