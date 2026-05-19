@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Pessoal - Meus Livros</title>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="./css/meuslivros.css">
+</head>
+<body>
+     <div class="dashboard-layout">
+
+        <div class="sidebar">
+            <h2>Biblioteca<br>Pessoal</h2>
+            <div class="sidebar-links">
+                <a href="./menu.html" class="active">Menu inicial</a>
+                <a href="">Meus Livros</a>
+                <a href="">Meu Perfil</a>
+                <a href="./dashboard.html">Dashboard</a>
+            </div>
+            <a class="LogOut" href="./login.html">Logout</a>
+        </div>
+
+        <div class="main-content">
+
+             <div class="boasvindas">
+                <img id="avatarUsuario" src="" alt="Avatar">
+                <span id="mensagemBoasVindas"></span>
+            </div>
+
+            <div class="cabecalho2">
+                <input id="ipt_buscarLivros" type="text" placeholder="Pesquisar livros..."> 
+                <button onclick="Cadastrar()">+ Cadastrar novo livro</button>
+            </div>
+            
+            <div class="container-livros">
+                
+            </div>
+     </div>
+</body>
+</html>
+<script>
+    var nickname = sessionStorage.NICKNAME_USUARIO;
+    var pronome = sessionStorage.PRONOME_USUARIO;
+    var avatarId = sessionStorage.AVATAR_USUARIO;
+    var caminhoFinal = ''
+
+    if (avatarId == 1) {
+        caminhoFinal = "./imagens/menina1.png - Editado.png"
+    } else if (avatarId == 2) {
+        caminhoFinal = "./imagens/menino1.png - Editado.png"
+    } else if (avatarId == 3) {
+        caminhoFinal = "./imagens/menina2.png - Editado.png"
+    } else if (avatarId == 4) {
+        caminhoFinal = "./imagens/menino2.png - Editado.png"
+    } else if (avatarId == 5) {
+        caminhoFinal = "./imagens/menina3.png - Editado.png"
+    } else if (avatarId == 6) {
+        caminhoFinal = "./imagens/menino3.png - Editado.png"
+    }
+
+    avatarUsuario.src = caminhoFinal;
+    console.log("Apelido:", nickname);
+    console.log("ID do Avatar:", avatarId);
+    console.log("Caminho gerado:", caminhoFinal);
+
+    if (pronome == 'ela/dela') {
+        mensagemBoasVindas.innerHTML = `Seja bem-vinda aos seus livros, ${nickname}!`;
+    } else if (pronome == 'ele/dele') {
+        mensagemBoasVindas.innerHTML = `Seja bem-vindo aos seus livros, ${nickname}!`;
+    } else {
+        mensagemBoasVindas.innerHTML = `Boas-vindas aos seus livros, ${nickname}!`;
+    }
+</script>
