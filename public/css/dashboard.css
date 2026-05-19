@@ -19,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-/* INICÍCIO ESTLIZAÇÃO MENU LATERAL*/
+/* INÍCIO ESTILIZAÇÃO MENU LATERAL */
 .sidebar {
     width: 240px;
     background-color: #A396E9;
@@ -66,22 +66,22 @@ body {
 .LogOut {
     margin-top: auto;
 }
+/* FIM ESTILIZAÇÃO MENU LATERAL */
 
-/*FIM ESTLIZAÇÃO MENU LATERAL*/
 
 /* INÍCIO ESTILIZAÇÃO CONTEÚDO PRINCIPAL */
 .main-content {
     flex: 1;
-    padding: 40px;
+    padding: 40px 40px 0 40px; 
     display: flex;
     flex-direction: column;
     gap: 32px;
     overflow-x: hidden;
     max-width: 100%;
+    min-height: 100vh;
 }
 
-/*MENSAGEM BOAS VINDAS*/
-
+/* MENSAGEM BOAS VINDAS */
 .boasvindas {
     display: flex;
     align-items: center;
@@ -92,10 +92,9 @@ body {
 
 .boasvindas span {
     font-weight: 600;
-    font-size: 30px;
+    font-size: 34px; 
     color: #4A338E;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-
 }
 
 /* AVATAR REDONDO */
@@ -124,14 +123,14 @@ body {
 /* Estilo individual de cada Card de KPI */
 .kpi {
     flex: 1;
-    min-width: 160px;
+    min-width: 180px; 
     background-color: white;
-    padding: 24px;
+    padding: 28px; 
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(163, 150, 233, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     transition: transform 0.3s ease;
 }
 
@@ -140,7 +139,7 @@ body {
 }
 
 .kpi_titulo {
-    font-size: 13px;
+    font-size: 15px; 
     color: #8E8E93;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -148,7 +147,7 @@ body {
 }
 
 .kpi_valor {
-    font-size: 32px;
+    font-size: 38px; 
     color: #2C2C2E;
     font-weight: 600;
     white-space: nowrap;
@@ -156,7 +155,7 @@ body {
     text-overflow: ellipsis;
 }
 
-/* KPI em destaque*/
+/* KPI em destaque */
 .kpi_destaque {
     background: linear-gradient(135deg, #A396E9, #8575E0);
 }
@@ -176,10 +175,9 @@ body {
     width: 100%;
     align-items: stretch;
     flex: 1;
-     min-height: 0; /* ← adiciona isso */
-    max-height: 400px;
+    min-height: 0; 
+    max-height: 460px; 
 }
-
 /* Card base dos gráficos */
 .grafico {
     background-color: white;
@@ -191,7 +189,6 @@ body {
     gap: 20px;
 }
 
-/* Ajuste de proporção: Linha ocupa mais espaço que a Pizza */
 .line-chart {
     flex: 1.8;
 }
@@ -201,29 +198,31 @@ body {
 }
 
 .grafico_titulo {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: #2C2C2E;
 }
 
-/* Wrapper para segurar o tamanho correto dos Canvas do Chart.js */
+/* Wrapper para os Canvas do Chart.js */
 .canvas-wrapper {
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 280px;
-    max-height: 350px;
+    min-height: 320px; 
+    max-height: 400px; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/*FOOTER*/
+/* FOOTER */
 .main-content footer {
-    padding: 7px;
-    width: 100%;
+    padding: 14px; 
+    width: calc(100% + 80px); 
+    margin-left: -40px; 
+    margin-right: -40px; 
+    margin-top: auto; 
     text-align: center;
     background-color: #dcd7f8;
     font-size: 14px;
-    margin-top: auto;
 }
