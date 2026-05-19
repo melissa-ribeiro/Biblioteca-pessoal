@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Pessoal - Meus Livros</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./menu.html">
     <link rel="stylesheet" href="./css/meuslivros.css">
 </head>
 
@@ -31,7 +32,9 @@
 
             <div class="cabecalho1">
                 <input id="ipt_buscarLivros" type="text" placeholder="Pesquisar livros..."> <button id="lupa" onclick="Pesquisar()">🔎︎</button>
-                <button id="pesquisar" onclick="Cadastrar()">+ Novo Livro</button>
+                <a href="./cadastroLivros.html">
+                    <button id="pesquisar">+ Novo Livro</button>
+                </a>
             </div>
 
             <div class="container-livros">
@@ -203,6 +206,4 @@
         mensagemBoasVindas.innerHTML = `Boas-vindas aos seus livros, ${nickname}!`;
     }
 
-
-    const livros = []
 </script>

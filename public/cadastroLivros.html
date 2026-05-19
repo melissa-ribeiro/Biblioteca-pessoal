@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Pessoal - Cadastrar Livro</title>
+    <link rel="stylesheet" href="./css/cadastroLivros.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <header class="header">
+            <div class="logo">
+                <!-- IMAGEM -->
+                <img src="./imagens/img1.png" alt="Logo">
+
+                <!-- BIBLIOTECA PESSOAL -->
+                <span>BIBLIOTECA PESSOAL</span>
+            </div>
+            <!-- BOTÃO VOLTAR -->
+            <div class="back">
+                <a href="./meuslivros.html">
+                    <button id="btnSair">← Voltar</button>
+                </a>
+            </div>
+        </header>
+
+        <div class="newbook">
+            <div class="boasvindas">
+                <span class="titulo-pagina">Novo Livro</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-form">
+        <p>Preencha as informações abaixo para adicionar um novo título à sua biblioteca.</p>
+
+        <div class="form">
+            <div class="campo-input">
+                <p>Título do livro:</p>
+                <input type="text" id="ipt_titulo" placeholder="Escreva o título do livro">
+            </div>
+
+            <div class="campo-input">
+                <p>Autor do livros:</p>
+                <input type="text" id="ipt_autor" placeholder="Escreva o autor do livro">
+            </div>
+
+            <div class="campo-input">
+                <p>Gênero:</p>
+                <select id="sel_genero">
+                    <option value="" disabled selected>Selecione um gênero</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Ficção Científica">Ficção Científica</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Biografia">Biografia</option>
+                    <option value="Religioso">Religioso</option>
+                    <option value="Tecnico">Técnico</option>
+                </select>
+            </div>
+
+            <div class="campo-input">
+                <p>Páginas:</p>
+                <input type="number" id="ipt_paginas" placeholder="Ex: 310">
+            </div>
+
+            <div class="campo-input">
+                <p>Status de leitura:</p>
+                <select id="sel_status" onchange="verificarStatus()">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="lendo">Lendo</option>
+                    <option value="concluido">Concluído</option>
+                </select>
+            </div>
+
+
+            <div id="secao-conclusao" class="checkbox" style="display: none;"">
+
+                <div class=" campo-input">
+                <label class="switch-label">
+                    <input type="checkbox" id="chk_favorito">
+                    <span class="custom-checkbox"></span>
+                    Marcar como Favorito ⭐
+                </label>
+            </div>
+
+            <div class="campo-input">
+                <p>Data conclusão</p>
+                <input type="date" id="ipt_data_conclusao">
+            </div>
+
+            <div class="campo-input">
+                <p>Avaliação (Estrelas):</p>
+                <select id="sel_avaliacao">
+                    <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                    <option value="4">⭐⭐⭐⭐☆ (Muito Bom)</option>
+                    <option value="3">⭐⭐⭐☆☆ (Bom)</option>
+                    <option value="2">⭐⭐☆☆☆ (Regular)</option>
+                    <option value="1">⭐☆☆☆☆ (Ruim)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-acoes">
+        <button class="btn-cancelar" onclick="window.location.href='./meuslivros.html'">Cancelar</button>
+        <button class="btn-salvar" onclick="salvarLivro()">Salvar Livro</button>
+    </div>
+    </div>
+
+    <footer>
+        © 2026 Melissa Ribeiro • Feito com ♡
+    </footer>
+
+</body>
+
+</html>
+<script>
+    function verificarStatus() {
+
+        var status = document.getElementById("sel_status").value;
+        var secaoConclusao = document.getElementById("secao-conclusao");
+
+        if (status == "lendo") {
+            secaoConclusao.style.display = "none";
+
+        } else {
+            sel_status = "none";
+            secaoConclusao.style.display = "block";
+
+        }
+    }
+
+    function salvarLivro() {
+           // adicionar o fetch
+            alert("Botão configurado! Pronto para enviar os dados.");
+        }
+</script>
