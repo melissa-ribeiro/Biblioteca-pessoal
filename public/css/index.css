@@ -118,26 +118,6 @@ html {
     padding-bottom: 0;
     
 }
-.onda {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-}
-
-.onda svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 100px; 
-}
-
-.onda .shape-fill {
-    fill:#F8F9FF; 
-}
 
 .conteudo {
     max-width: 500px;
