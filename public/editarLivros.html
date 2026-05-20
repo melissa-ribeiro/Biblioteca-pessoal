@@ -160,7 +160,7 @@
 
             // Enviando o valor da nova input
             var idUsuario = sessionStorage.ID_USUARIO; 
-            fetch(`/usuarios/cadastrarLivros/${idUsuario}`, {
+            fetch(`/usuarios/editarLivro/${idUsuario}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

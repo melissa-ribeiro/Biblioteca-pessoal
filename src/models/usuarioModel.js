@@ -98,12 +98,23 @@ function buscarKpis(idUsuario) {
 // MEUS LIVROS
 // CADASTRAR LIVROS (SEM FAVORITOS || SEM AVALIACAO)
 function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario) {
-    var insertSql = `
+
+    
+    if (dt_conclusao != '') {
+         var insertSql = `
         INSERT INTO livros (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
-        VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}','${dt_conclusao}','${idUsuario}')
+        VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}', ${dt_conclusao ? `'${dt_conclusao}'` : 'NULL'} ,'${idUsuario}')
     `;
-    console.log("Executando a instrução SQL: \n" + insertSql);
-    return database.executar(insertSql);
+        console.log("Executando a instrução SQL: \n" + insertSql);
+        return database.executar(insertSql);
+    } else {
+        var insertSql = `
+        INSERT INTO livros (nome, autor, genero, paginas, status_leitura, usuario_id)
+        VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}','${idUsuario}')
+    `;
+        console.log("Executando a instrução SQL: \n" + insertSql);
+        return database.executar(insertSql);
+    }
 }
 
 // INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
@@ -125,7 +136,7 @@ function salvarAvaliacao(idUsuario, idLivro, avaliacao) {
     return database.executar(instrucaoSql);
 }
 // BUSCA LIVROS CADASTRADOS (COM LEFT, POIS SE NÃO HOUVER FAV, DT_CONCL OU AVALIACAO, FICA NULL OU FALSE)
-function buscarLivro(idUsuario){
+function buscarLivro(idUsuario) {
     var instrucaoSql = `SELECT l.id_livro,
 	l.nome AS titulo,
     l.autor AS autor,

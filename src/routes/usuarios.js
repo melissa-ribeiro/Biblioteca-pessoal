@@ -39,9 +39,15 @@ router.get("/kpis/:idUsuario", function(req,res) {
 router.post("/cadastrarLivros/:idUsuario", function(req,res){
     usuarioController.salvarLivro(req,res)
 })
+
 // BUSCANDO LIVROS CADATSRADOS 
 router.get("/listarLivros/:idUsuario", function(req,res){
     usuarioController.buscarLivro(req,res)
+})
+
+// EDITAR LIVROS
+router.put("/AlterarLivros/:idUsuario", function(req,res){ // put - alterar algo já existente
+    usuarioController.editarLivro(req,res)
 })
 
 module.exports = router;

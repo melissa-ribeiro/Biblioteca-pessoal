@@ -143,6 +143,7 @@
         var avaliacao = sel_avaliacao.value
         var stts = sel_status.value
         var genero = sel_genero.value
+        var idUsuario = sessionStorage.ID_USUARIO; 
 
 
         if (titulo == '') {
@@ -159,7 +160,6 @@
         else {
 
             // Enviando o valor da nova input
-            var idUsuario = sessionStorage.ID_USUARIO; 
             fetch(`/usuarios/cadastrarLivros/${idUsuario}`, {
                 method: "POST",
                 headers: {
