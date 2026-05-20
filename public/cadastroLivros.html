@@ -21,20 +21,20 @@
             <!-- BOTÃO VOLTAR -->
             <div class="back">
                 <a href="./meuslivros.html">
-                    <button id="btnSair">← Voltar</button>
+                    <button id="btnSair">Voltar</button>
                 </a>
             </div>
         </header>
 
         <div class="newbook">
             <div class="boasvindas">
-                <span class="titulo-pagina">Novo Livro</span>
+                <span>Adicionar novo livro</span>
             </div>
         </div>
     </div>
 
     <div class="container-form">
-        <p>Preencha as informações abaixo para adicionar um novo título à sua biblioteca.</p>
+        <span>Preencha as informações abaixo para adicionar um novo título à sua biblioteca.</span>
 
         <div class="form">
             <div class="campo-input">
@@ -79,11 +79,11 @@
             <div id="secao-conclusao" class="checkbox" style="display: none;"">
 
                 <div class=" campo-input">
-                <label class="switch-label">
+                <label>
                     <input type="checkbox" id="chk_favorito">
-                    <span class="custom-checkbox"></span>
-                    Marcar como Favorito ⭐
+                    <p>Marcar como Favorito ⭐</p>
                 </label>
+
             </div>
 
             <div class="campo-input">
@@ -134,7 +134,22 @@
     }
 
     function salvarLivro() {
-           // adicionar o fetch
+        // adicionar o fetch
+        var titulo = ipt_titulo.value
+        var autor = ipt_autor.value
+        var pages = ipt_paginas.value
+        var dt_conclusao = ipt_data_conclusao.value
+
+
+        if(titulo == ''){
+            alert("Insira o título do livro.")
+        }else if(autor == ''){
+            alert("Insira o autor do livro")
+        }else if (ipt_paginas.value == ''){
+            alert("Insira a quantidade de páginas do livro")
+        } else {
+
             alert("Botão configurado! Pronto para enviar os dados.");
         }
+    }
 </script>
