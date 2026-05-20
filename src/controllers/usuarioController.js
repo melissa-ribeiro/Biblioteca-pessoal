@@ -165,10 +165,94 @@ function buscarLivrosLidosMes(req, res) {
 }
 
 
-function buscarKpis(req,res){
-    var idUsuario  = req.params.idUsuario;
+function buscarKpis(req, res) {
+    var idUsuario = req.params.idUsuario;
 
     usuarioModel.buscarKpis(idUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+// CADASTRO DE LIVROS
+function salvarLivro(req, res) {
+
+    var titulo = req.body.tituloServer;
+    var autor = req.body.autorServer;
+    var pages = req.body.pagesServer;
+    var genero = req.body.generoServer;
+    var stts = req.body.sttsServer;
+    var idUsuario = req.params.idUsuario;
+
+    // Campos opcionais — só existem se status for 'concluido'
+    var dt_conclusao = req.body.dt_conclusaoServer || null;
+    var favorito = req.body.favoritoServer || false;
+    var avaliacao = req.body.avaliacaoServer || null;
+
+    //validações dos valores
+    if (titulo == undefined) {
+        res.status(400).send("O titulo está undefined!");
+
+    } else if (autor == undefined) {
+        res.status(400).send("O autor está undefined!");
+
+    } else if (pages == undefined) {
+        res.status(400).send("As páginas estão undefined!");
+
+    } else if (genero == undefined) {
+        res.status(400).send("O gênero está undefined!");
+
+    } else if (stts == undefined) {
+        res.status(400).send("O status está undefined!");
+    } else {
+
+        usuarioModel.salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario)
+            .then(
+                function (resultado) {
+                    var idLivro = resultado.insertId; // id gerado pelo banco
+
+                    if(favorito){
+                        return usuarioModel.salvarFavorito(idUsuario, idLivro)
+                        .then(function(){
+                            return idLivro; // passa o id para o próximo .then
+                        })
+                    }
+                    return idLivro;
+                }
+            ).then(function(idLivro){
+                //Se avaliou, INSERT em avaliacao
+
+                if(avaliacao){
+                    return usuarioModel.salvarAvaliacao(idUsuario, idLivro, avaliacao);
+                }
+            })
+            .then(function () {
+                res.status(200).json({ mensagem: "Livro salvo com sucesso!" });
+            })
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function buscarLivro(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    usuarioModel.buscarLivro(idUsuario)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -187,5 +271,7 @@ module.exports = {
     onboarding,
     buscarGenerosMaisLidos,
     buscarLivrosLidosMes,
-    buscarKpis
+    buscarKpis,
+    salvarLivro,
+    buscarLivro
 }

@@ -94,11 +94,67 @@ function buscarKpis(idUsuario) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+// MEUS LIVROS
+// CADASTRAR LIVROS (SEM FAVORITOS || SEM AVALIACAO)
+function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario) {
+    var insertSql = `
+        INSERT INTO livros (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
+        VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}','${dt_conclusao}','${idUsuario}')
+    `;
+    console.log("Executando a instrução SQL: \n" + insertSql);
+    return database.executar(insertSql);
+}
+
+// INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
+function salvarFavorito(idUsuario, idLivro) {
+    var instrucaoSql = `
+        INSERT INTO favoritos (usuario_id, livro_id)
+        VALUES (${idUsuario}, ${idLivro});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+// INSERIR AVALIAÇÃO SE LIVRO JÁ CONCLUÍDO
+function salvarAvaliacao(idUsuario, idLivro, avaliacao) {
+    var instrucaoSql = `
+        INSERT INTO avaliacao (usuario_id, livro_id, estrelas)
+        VALUES (${idUsuario}, ${idLivro}, ${avaliacao});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+// BUSCA LIVROS CADASTRADOS (COM LEFT, POIS SE NÃO HOUVER FAV, DT_CONCL OU AVALIACAO, FICA NULL OU FALSE)
+function buscarLivro(idUsuario){
+    var instrucaoSql = `SELECT l.id_livro,
+	l.nome AS titulo,
+    l.autor AS autor,
+    l.genero AS genero,
+    l.paginas AS pages,
+    l.status_leitura AS stts,
+    l.data_conclusao AS dt_conclusao,
+    a.estrelas,
+     CASE WHEN f.livro_id IS NOT NULL THEN 1 ELSE 0 END AS favorito
+    FROM livros AS l
+    LEFT JOIN avaliacao AS a
+    ON a.livro_id = l.id_livro
+    LEFT JOIN favoritos AS f 
+    on f.livro_id = l.id_livro
+    WHERE l.usuario_id = ${idUsuario};`
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     onboarding,
     buscarGenerosMaisLidos,
     buscarLivrosLidosMes,
-    buscarKpis
+    buscarKpis,
+    salvarLivro,
+    salvarFavorito,
+    salvarAvaliacao,
+    buscarLivro
 };

@@ -34,4 +34,14 @@ router.get("/kpis/:idUsuario", function(req,res) {
     usuarioController.buscarKpis(req,res)
 })  
 
+
+//RECEBENDO LIVROS CADASTRADOS
+router.post("/cadastrarLivros/:idUsuario", function(req,res){
+    usuarioController.salvarLivro(req,res)
+})
+// BUSCANDO LIVROS CADATSRADOS 
+router.get("/listarLivros/:idUsuario", function(req,res){
+    usuarioController.buscarLivro(req,res)
+})
+
 module.exports = router;

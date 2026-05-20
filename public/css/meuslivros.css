@@ -244,7 +244,7 @@ body {
     /* Cor branca nas linhas ímpares */
 }
 
-#btnedit, #btndelete {
+#btnedit {
     margin-top: 0px;
     padding: 12px;
     border-radius: 8px;
@@ -256,7 +256,7 @@ body {
     background-color: transparent;
     
 }
-#btnedit:hover, #btndelete:hover {
+#btnedit:hover {
     transform: translateY(-2px);
 }
 /* FOOTER */
