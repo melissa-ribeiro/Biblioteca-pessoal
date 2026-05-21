@@ -84,12 +84,14 @@
 <script>
     var avatarEscolhido = "";
 
-    function selecionarAvatar(numero) {
+    function selecionarAvatar(numero) { 
+        //selcionarAvatar recebe número do avatar como parâmetro
 
-        avatarEscolhido = numero;
+        avatarEscolhido = numero; 
 
         var listaAvatares = document.querySelectorAll(".avatares img");
-        listaAvatares.forEach(function (img) {
+
+        listaAvatares.forEach(function (img) { 
             img.classList.remove("avatar-selecionado");
         });
 

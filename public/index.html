@@ -222,7 +222,7 @@
     quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
 
     /*Quotes dinamicos:*/
-    setInterval(() => {
+    setInterval(() => { 
         i++;
 
         if (i >= quotes.length) {
@@ -285,8 +285,10 @@
     })
 
     function Aleatorio() {
-        var aleatorio = Math.floor(Math.random() * books.length); /*Fórmula para gerar números inteiros aleatórios
-                                                                 de acordo com a quantidade de ocorrências do vetor*/
+        var aleatorio = Math.floor(Math.random() * books.length); 
+        /*Fórmula para gerar números inteiros aleatórios
+         de acordo com a quantidade de ocorrências do vetor*/
+        
         var livro = books[aleatorio]; 
 
         book.innerHTML = `<h2>${livro.titulo}</h2>

@@ -357,6 +357,7 @@ function editarLivro(req, res) {
     }
 }
 
+
 module.exports = {
     autenticar,
     cadastrar,
