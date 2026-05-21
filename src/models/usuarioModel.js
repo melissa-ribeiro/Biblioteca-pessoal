@@ -119,22 +119,35 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
 
 // INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
 function salvarFavorito(idUsuario, idLivro) {
-    var instrucaoSql = `
-        INSERT INTO favoritos (usuario_id, livro_id)
+     var instrucaoSql = `
+        INSERT IGNORE INTO favoritos (usuario_id, livro_id)
         VALUES (${idUsuario}, ${idLivro});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-// INSERIR AVALIAÇÃO SE LIVRO JÁ CONCLUÍDO
-function salvarAvaliacao(idUsuario, idLivro, avaliacao) {
+// REMOVER FAVORITO
+function removerFavorito(idUsuario, idLivro) {
     var instrucaoSql = `
-        INSERT INTO avaliacao (usuario_id, livro_id, estrelas)
-        VALUES (${idUsuario}, ${idLivro}, ${avaliacao});
+        DELETE FROM favoritos 
+        WHERE usuario_id = ${idUsuario} 
+        AND livro_id = ${idLivro};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+// INSERIR AVALIAÇÃO SE LIVRO JÁ CONCLUÍDO
+function salvarAvaliacao(idUsuario, idLivro, avaliacao) {
+    var instrucaoSql = `
+        INSERT INTO avaliacao (usuario_id, livro_id, estrelas)
+        VALUES (${idUsuario}, ${idLivro}, ${avaliacao})
+        ON DUPLICATE KEY UPDATE estrelas = ${avaliacao}; 
+     `; // DUPLICATE KEY serve pra se já existir uma avaliação para esse usuário e livro, ATUALIZA as estrelas em vez de dar erro
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 // BUSCA LIVROS CADASTRADOS (COM LEFT, POIS SE NÃO HOUVER FAV, DT_CONCL OU AVALIACAO, FICA NULL OU FALSE)
 function buscarLivro(idUsuario) {
     var instrucaoSql = `SELECT l.id_livro,
@@ -145,7 +158,7 @@ function buscarLivro(idUsuario) {
     l.status_leitura AS stts,
     l.data_conclusao AS dt_conclusao,
     a.estrelas,
-     CASE WHEN f.livro_id IS NOT NULL THEN 1 ELSE 0 END AS favorito
+    CASE WHEN f.livro_id IS NOT NULL THEN 1 ELSE 0 END AS favorito
     FROM livros AS l
     LEFT JOIN avaliacao AS a
     ON a.livro_id = l.id_livro
@@ -154,6 +167,37 @@ function buscarLivro(idUsuario) {
     WHERE l.usuario_id = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+// Função 1 — busca UM livro para preencher o formulário
+function buscarLivroParaEditar(idLivro) {
+    var instrucaoSql = `
+        SELECT l.id_livro, l.nome AS titulo, l.autor, l.genero,
+        l.paginas AS pages, l.status_leitura AS stts,
+        l.data_conclusao AS dt_conclusao, a.estrelas,
+        CASE WHEN f.livro_id IS NOT NULL THEN 1 ELSE 0 END AS favorito
+        FROM livros AS l
+        LEFT JOIN avaliacao AS a ON a.livro_id = l.id_livro
+        LEFT JOIN favoritos AS f ON f.livro_id = l.id_livro
+        WHERE l.id_livro = ${idLivro};
+    `;
+    return database.executar(instrucaoSql);
+}
+
+// Função 2 — atualiza os dados do livro
+function editarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idLivro) {
+    var dataConclusao = (dt_conclusao && dt_conclusao != '') ? `'${dt_conclusao}'` : 'NULL';
+    var instrucaoSql = `
+        UPDATE livros 
+        SET nome = '${titulo}',
+            autor = '${autor}',
+            genero = '${genero}',
+            paginas = '${pages}',
+            status_leitura = '${stts}',
+            data_conclusao = ${dataConclusao}
+        WHERE id_livro = ${idLivro};
+    `;
     return database.executar(instrucaoSql);
 }
 
@@ -166,6 +210,9 @@ module.exports = {
     buscarKpis,
     salvarLivro,
     salvarFavorito,
+    removerFavorito,
     salvarAvaliacao,
-    buscarLivro
+    buscarLivro,
+    buscarLivroParaEditar,
+    editarLivro
 };

@@ -60,7 +60,7 @@
                     <option value="Tecnico">Técnico</option>
                 </select>
             </div>
-            
+
             <div class="campo-input">
                 <p>Páginas:</p>
                 <input type="number" id="ipt_paginas" placeholder="Ex: 310">
@@ -106,7 +106,7 @@
 
     <div class="form-acoes">
         <button class="btn-cancelar" onclick="window.location.href='./meuslivros.html'">Cancelar</button>
-        <button class="btn-salvar" onclick="salvarLivro()">Salvar Livro</button>
+        <button class="btn-salvar" onclick="editarLivro()">Salvar Livro</button>
     </div>
     </div>
 
@@ -127,14 +127,68 @@
             secaoConclusao.style.display = "none";
 
         } else {
-            sel_status = "none";
             secaoConclusao.style.display = "block";
 
         }
     }
 
-    function editarLivro() {
 
+    function buscarLivroParaEditar() { // função para busca os dados no BD, para o user não precisar redigitar o que estava definido
+
+        var parametros = new URLSearchParams(window.location.search); 
+        // URLSearchParams = transforma a URl em algo legivel
+        var idLivro = parametros.get('id'); // extrai o valor do parâmetro id
+
+        var idUsuario = sessionStorage.ID_USUARIO; // id do usuário logado
+
+        fetch(`/usuarios/buscarLivros/${idLivro}`, { // fetch faz requisição HTTP para servidor
+            method: "GET" // GET busca dados no banco
+        })
+            .then(function (resposta) { // then executa quando o servidor responde
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    resposta.json().then(function (dadosDoBanco) { // converte  string para bjeto
+                        var livro = dadosDoBanco[0]; // pega o primeiro (e único) resultado, pois o banco retorna um array mesmo com um livro só.
+                        // livro é o OBJETO (json) — o primeiro item do array
+
+                        // Preenche os campos com os dados do livro
+                        ipt_titulo.value = livro.titulo;
+                        ipt_autor.value = livro.autor;
+                        ipt_paginas.value = livro.pages;
+                        sel_genero.value = livro.genero;
+                        sel_status.value = livro.stts;
+
+
+                        console.log("stts do banco:", livro.stts);  
+                        console.log("sel_status.value após preencher:", sel_status.value); // apenas para verifiar se há erro
+
+                        // Se tiver data de conclusão, mostra a seção que estava escondida;
+                        if (livro.stts == 'concluido') {
+                            document.getElementById('secao-conclusao').style.display = 'block';
+                            ipt_data_conclusao.value = livro.dt_conclusao;
+                            chk_favorito.checked = livro.favorito == 1;
+                            sel_avaliacao.value = livro.estrelas;
+                        }
+                    })
+
+                }
+            })
+            .catch(function (resposta) { // captura qualquer erro que aconteça no fetch ou no .then - exibe o erro no console e um alert para o usuário.
+                console.log(`#ERRO: ${resposta}`);
+                alert(resposta);
+
+            });
+
+        return false;
+    }
+
+
+
+    function editarLivro() { // função chamada pra quando o usuário clica em salvar livros
+
+        var parametros = new URLSearchParams(window.location.search); // recebe o id do livro como parâmetro
+        var idLivro = parametros.get('id'); // pega o id da URL
         var titulo = ipt_titulo.value
         var autor = ipt_autor.value
         var pages = ipt_paginas.value
@@ -143,8 +197,9 @@
         var avaliacao = sel_avaliacao.value
         var stts = sel_status.value
         var genero = sel_genero.value
+        // variáveis
 
-
+        //validações
         if (titulo == '') {
             alert("Insira o título do livro.")
         } else if (autor == '') {
@@ -159,14 +214,17 @@
         else {
 
             // Enviando o valor da nova input
-            var idUsuario = sessionStorage.ID_USUARIO; 
-            fetch(`/usuarios/editarLivro/${idUsuario}`, {
-                method: "POST",
+            var idUsuario = sessionStorage.ID_USUARIO; // id do usuário logado
+            console.log("stts:", stts);
+            console.log("sel_status.value:", sel_status.value);
+            fetch(`/usuarios/AlterarLivros/${idLivro}`, {
+                method: "PUT", // PUT, pois quer ALTTERAR algom existente
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json", // avisa o servidor que os dados estão em formato de Json
                 },
-                body: JSON.stringify({
+                body: JSON.stringify({ //  converte o objeto JavaScript para texto JSON (formato que viaja pela internet)
 
+                    //  nome que o controller usa para receber [...]Server
                     tituloServer: titulo,
                     autorServer: autor,
                     pagesServer: pages,
@@ -174,24 +232,22 @@
                     favoritoServer: favorito,
                     avaliacaoServer: avaliacao,
                     sttsServer: stts,
-                    generoServer: genero
+                    generoServer: genero,
+                    idUsuarioServer: idUsuario // idUsuário no body, pois URL já tem o id do livro
                 }),
             })
-                .then(function (resposta) {
+                .then(function (resposta) { // executa quando o servidor resçponde
                     console.log("resposta: ", resposta);
 
                     if (resposta.ok) {
-
-
-                        alert("Cadastro realizado com sucesso!");
-
+                        alert("Livro editado com sucesso!");
                         setTimeout(() => {
                             window.location = "./meuslivros.html";
-                        }, "2000");
-
+                        }, 1000); // se resposta ok, redireciona para página meus livros
                     } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
+                        throw "Houve um erro ao tentar realizar a alteração!";
                     }
+
                 })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
@@ -204,5 +260,7 @@
     }
 
 
-
+    window.onload = function () {
+        buscarLivroParaEditar();
+    }; // Chama a função assim que a página terminar de carregar
 </script>

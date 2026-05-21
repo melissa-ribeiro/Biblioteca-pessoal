@@ -45,8 +45,14 @@ router.get("/listarLivros/:idUsuario", function(req,res){
     usuarioController.buscarLivro(req,res)
 })
 
+// BUSCAR LIVROS PARA EDITAR
+router.get("/buscarLivros/:idLivro", function(req,res){
+    usuarioController.buscarLivroParaEditar(req,res)
+})
+
 // EDITAR LIVROS
-router.put("/AlterarLivros/:idUsuario", function(req,res){ // put - alterar algo já existente
+router.put("/AlterarLivros/:idLivro", function(req,res){ // put - alterar algo já existente
+    console.log("Rota AlterarLivros acionada! idLivro:", req.params.idLivro);
     usuarioController.editarLivro(req,res)
 })
 

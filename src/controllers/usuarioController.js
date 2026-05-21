@@ -216,21 +216,20 @@ function salvarLivro(req, res) {
         usuarioModel.salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario)
             .then(
                 function (resultado) {
-                    var idLivro = resultado.insertId; // id gerado pelo banco
-
-                    if(favorito){ 
+                    var idLivro = resultado.insertId; // id gerado pelo INSERT
+                    if (favorito) {
                         // se stts = concluído; inserir em favorito
                         return usuarioModel.salvarFavorito(idUsuario, idLivro)
-                        .then(function(){
-                            return idLivro; // passa o id para o próximo .then
-                        })
+                            .then(function () {
+                                return idLivro; // passa o id para o próximo .then
+                            })
                     }
                     return idLivro;
                 }
-            ).then(function(idLivro){
+            ).then(function (idLivro) {
                 //Se avaliou, INSERT em avaliacao
 
-                if(avaliacao){
+                if (avaliacao) {
                     return usuarioModel.salvarAvaliacao(idUsuario, idLivro, avaliacao);
                 }
             })
@@ -266,6 +265,98 @@ function buscarLivro(req, res) {
         });
 }
 
+
+// ALTERAR LIVRO
+function buscarLivroParaEditar(req, res) {
+    var idLivro = req.params.idLivro;
+
+    usuarioModel.buscarLivroParaEditar(idLivro)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function editarLivro(req, res) {
+    console.log("Dados recebidos:", req.body, "idLivro:", req.params.idLivro); // apenas para identificar possiveis erros no terminal
+
+    var titulo = req.body.tituloServer;
+    var autor = req.body.autorServer;
+    var pages = req.body.pagesServer;
+    var genero = req.body.generoServer;
+    var stts = req.body.sttsServer; // dados que vieram do body do fetch
+
+    var idLivro = req.params.idLivro; // pega que vem da URL
+    var idUsuario = req.body.idUsuarioServer; // idUsuario vem do body, porque a URL só tem o idLivro
+
+    // Campos opcionais
+    var dt_conclusao = req.body.dt_conclusaoServer || null;
+    var favorito = req.body.favoritoServer || false;
+    var avaliacao = req.body.avaliacaoServer || null;
+
+    //validações dos valores
+    if (titulo == undefined) {
+        res.status(400).send("O titulo está undefined!");
+
+    } else if (autor == undefined) {
+        res.status(400).send("O autor está undefined!");
+
+    } else if (pages == undefined) {
+        res.status(400).send("As páginas estão undefined!");
+
+    } else if (genero == undefined) {
+        res.status(400).send("O gênero está undefined!");
+
+    } else if (stts == undefined) {
+        res.status(400).send("O status está undefined!");
+    } else {
+
+
+        usuarioModel.editarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idLivro) // idLivro que vai para o model; parametros precisam estar na mesma ordem
+
+            .then(
+                function (resultado) {
+
+                    if (favorito) {
+                        // favorito marcado, então INSERT IGNORE (serve para ignorar silenciosamente se o registro já existir )
+                        return usuarioModel.salvarFavorito(idUsuario, idLivro)
+                            .then(function () { return idLivro; });
+                    } else {
+                        // favorito desmarcado, então DELETE
+                        return usuarioModel.removerFavorito(idUsuario, idLivro)
+                            .then(function () { return idLivro; });
+                    }
+
+                }
+            ).then(function (idLivro) {
+                //Se avaliou, INSERT em avaliacao
+
+                if (avaliacao) {
+                    return usuarioModel.salvarAvaliacao(idUsuario, idLivro, avaliacao); // se avaliou, faz insert ON DUPLICATE KEY UPDATE  ()
+                }
+            })
+            .then(function () {
+                res.status(200).json({ mensagem: "Livro salvo com sucesso!" }); // Se tudo deu certo, mostra alert sucesso
+            })
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -274,5 +365,7 @@ module.exports = {
     buscarLivrosLidosMes,
     buscarKpis,
     salvarLivro,
-    buscarLivro
+    buscarLivro,
+    buscarLivroParaEditar,
+    editarLivro
 }

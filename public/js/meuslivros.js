@@ -43,9 +43,9 @@ function listarLivros() {
                                 <td>${estrelas}</td>
                                 <td>${data}</td>
                                <td class="col-acoes">
-                                <a href="./cadastroLivros.html">
-                                <button onclick="window.location.href='./editarLivro.html?id=${livro.id_livro}'">Editar</button>
-                                </a>
+                                
+                                <button onclick="window.location.href='./editarLivros.html?id=${livro.id_livro}'">Editar</button>
+                             
                                 
                                 </td>
                             </tr>
