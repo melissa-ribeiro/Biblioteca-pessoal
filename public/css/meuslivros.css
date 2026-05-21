@@ -110,41 +110,13 @@ body {
 
 .cabecalho1 {
     display: flex;
-    justify-content: right;
-    gap: 10px;
+    justify-content: left;
 }
 
-.cabecalho1 input {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 14px;
-    transition: 0.3s;
-}
 
-.cabecalho1 input:focus {
-    border-color: #8B78E6;
-    box-shadow: 0 0 5px rgba(139, 120, 230, 0.5);
-}
-
-#lupa {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 10px;
-    transition: 0.3s;
-    background-color: #ffffff;
-}
-
-#lupa:focus {
-    border-color: #8B78E6;
-    box-shadow: 0 0 5px rgba(139, 120, 230, 0.5);
-}
-
-#pesquisar {
+#AddBook {
     margin-top: 0px;
+    margin-left: 10px;
     padding: 12px;
     border-radius: 8px;
     border: none;
@@ -153,9 +125,10 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    font-size: large;
 }
 
-#pesquisar:hover {
+#AddBook:hover {
     background-color: #6E5CD6;
     transform: translateY(-2px);
 }

@@ -44,7 +44,7 @@ function listarLivros() {
                                 <td>${data}</td>
                                <td class="col-acoes">
                                 
-                                <button onclick="window.location.href='./editarLivros.html?id=${livro.id_livro}'">Editar</button>
+                                <button id="btnedit" onclick="window.location.href='./editarLivros.html?id=${livro.id_livro}'">Editar</button>
                              
                                 
                                 </td>
