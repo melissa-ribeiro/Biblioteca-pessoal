@@ -1,11 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Pessoal - Meu perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/meuperfil.css">
 </head>
+
 <body>
-    
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <h2>Biblioteca<br>Pessoal</h2>
+            <div class="sidebar-links">
+                <a href="./menu.html">Menu inicial</a>
+                <a href="./meuslivros.html">Meus Livros</a>
+                <a href="./dashboard.html">Dashboard</a>
+            </div>
+            <a class="LogOut" href="./login.html">Logout</a>
+        </div>
+
+        <div class="main-content">
+            
+            <div class="container-card container1">
+                <img id="avatarUsuario" src="https://via.placeholder.com/250" alt="Avatar">
+                
+                <div class="perfil-info">
+                    <span id="mensagemBoasVindas">Seja bem-vinda, Maria!</span>
+                    
+                    <div class="seuperfil">
+                        <span class="titulo-perfil">Seu Perfil de Leitor:</span>
+                        <p id="mensagemPerfil">Leitor Voraz</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-card container2">
+                <span class="titulo-secao">Meus Gêneros Favoritos</span>
+                <div class="tags-generos">
+                    <span class="tag">Fantasia</span>
+                    <span class="tag">Ficção Científica</span>
+                    <span class="tag">Romance</span>
+                    <span class="tag">Mistério</span>
+                </div>
+            </div>
+
+            <div class="container-card container3">
+                <div class="quote">
+                    <span class="aspas">❝</span>
+                    <p id="quoteText">Um leitor vive mil vidas antes de morrer. O homem que nunca lê vive apenas uma.</p>
+                    <span class="aspas">❞</span>
+                </div>
+            </div>
+
+            <footer>
+                © 2026 Melissa Ribeiro • Feito com ♡
+            </footer>
+        </div>
+    </div>
 </body>
+
 </html>
+<script>
+    var nickname = sessionStorage.NICKNAME_USUARIO;
+    var pronome = sessionStorage.PRONOME_USUARIO;
+    var avatarId = sessionStorage.AVATAR_USUARIO;
+    var caminhoFinal = ''
+
+
+
+    if (avatarId == 1) {
+        caminhoFinal = "./imagens/menina1.png - Editado.png"
+    } else if (avatarId == 2) {
+        caminhoFinal = "./imagens/menino1.png - Editado.png"
+    } else if (avatarId == 3) {
+        caminhoFinal = "./imagens/menina2.png - Editado.png"
+    } else if (avatarId == 4) {
+        caminhoFinal = "./imagens/menino2.png - Editado.png"
+    } else if (avatarId == 5) {
+        caminhoFinal = "./imagens/menina3.png - Editado.png"
+    } else if (avatarId == 6) {
+        caminhoFinal = "./imagens/menino3.png - Editado.png"
+    }
+
+    avatarUsuario.src = caminhoFinal;
+    console.log("Apelido:", nickname);
+    console.log("ID do Avatar:", avatarId);
+    console.log("Caminho gerado:", caminhoFinal);
+
+    if (pronome == 'ela/dela') {
+        mensagemBoasVindas.innerHTML = `Seja bem-vinda ao seu perfil, ${nickname}!`;
+    } else if (pronome == 'ele/dele') {
+        mensagemBoasVindas.innerHTML = `Seja bem-vindo ao seu perfil, ${nickname}!`;
+    } else {
+        mensagemBoasVindas.innerHTML = `Boas-vindas ao seu perfil, ${nickname}!`;
+    }
+
+     const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
+        'Leitura, antes de mais nada, é estímulo, é exemplo.',
+        'Um livro é um sonho que você segura na mão.',
+        'Quem lê, vive mil vidas em uma só.',
+        'Ler é viajar sem sair do lugar.']  /*Vetor com frases*/
+
+    let i = 0 /*Variável para ler o vetor*/
+
+    quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
+
+    /*Quotes dinamicos:*/
+    setInterval(() => {
+        i++;
+
+        if (i >= quotes.length) {
+            i = 0;
+        }
+
+        quoteText.innerHTML = `${quotes[i]}`
+    }, 5000); /*muda os quotes a cada 5 seg*/
+</script>
