@@ -59,6 +59,10 @@ router.put("/AlterarLivros/:idLivro", function(req,res){ // put - alterar algo j
 // ROUTE MEU PERFIL
 router.get("/fraseLeitor/:idUsuario",function(req,res) {
     console.log("Rota fraseLeitor acionada! idUsuario:", req.params.idUsuario);
-    usuarioController.editarLivro(req,res)
+    usuarioController.buscarPerfilLeitor(req,res)
 })
+
+router.get("/generosFavoritos/:idUsuario", function(req, res) {
+    usuarioController.buscarGenerosFavoritos(req, res);
+});
 module.exports = router;

@@ -22,13 +22,13 @@
         </div>
 
         <div class="main-content">
-            
+
             <div class="container-card container1">
                 <img id="avatarUsuario" src="https://via.placeholder.com/250" alt="Avatar">
-                
+
                 <div class="perfil-info">
                     <span id="mensagemBoasVindas">Seja bem-vinda, Maria!</span>
-                    
+
                     <div class="seuperfil">
                         <span class="titulo-perfil">Seu Perfil de Leitor:</span>
                         <p id="mensagemPerfil">Leitor Voraz</p>
@@ -49,7 +49,8 @@
             <div class="container-card container3">
                 <div class="quote">
                     <span class="aspas">❝</span>
-                    <p id="quoteText">Um leitor vive mil vidas antes de morrer. O homem que nunca lê vive apenas uma.</p>
+                    <p id="quoteText">Um leitor vive mil vidas antes de morrer. O homem que nunca lê vive apenas uma.
+                    </p>
                     <span class="aspas">❞</span>
                 </div>
             </div>
@@ -67,6 +68,7 @@
     var pronome = sessionStorage.PRONOME_USUARIO;
     var avatarId = sessionStorage.AVATAR_USUARIO;
     var caminhoFinal = ''
+    var idUsuario = sessionStorage.ID_USUARIO;
 
 
 
@@ -97,7 +99,7 @@
         mensagemBoasVindas.innerHTML = `Boas-vindas ao seu perfil, ${nickname}!`;
     }
 
-     const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
+    const quotes = ['A leitura é, provavelmente, uma outra maneira de estar em um lugar.',
         'Leitura, antes de mais nada, é estímulo, é exemplo.',
         'Um livro é um sonho que você segura na mão.',
         'Quem lê, vive mil vidas em uma só.',
@@ -117,4 +119,98 @@
 
         quoteText.innerHTML = `${quotes[i]}`
     }, 5000); /*muda os quotes a cada 5 seg*/
+
+
+
+    // função fetch para buscar a frase
+    function buscarFrasePerfil() {
+        // Garantindo que o usuário tem um ID antes de buscar
+        if (!idUsuario) {
+            console.log("ID do usuário não encontrado na sessão.");
+            return;
+        }
+
+        fetch(`/usuarios/fraseLeitor/${idUsuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(function (resposta) {
+                console.log("Resposta da rota fraseLeitor: ", resposta);
+
+                if (resposta.ok) {
+                    resposta.json().then(function (dados) {
+                        // Extraí a frase que veio do banco de dados
+                        var fraseDoLeitor = dados[0].frase;
+
+                        // Coloca a frase na tela:
+                        mensagemPerfil.innerHTML = fraseDoLeitor;
+                    });
+                } else {
+                    console.error("Houve um erro na API ao buscar o perfil!");
+                }
+            })
+            .catch(function (erro) {
+                console.log(`#ERRO: ${erro}`);
+            });
+    }
+
+    // função fetch pra bucar generos favoritos
+    function buscarMeusGeneros() {
+
+    // vendo se o usuario tem id
+    if (!idUsuario) {
+        console.log("ID do usuário não encontrado na sessão.");
+        return; 
+    }
+
+    fetch(`/usuarios/generosFavoritos/${idUsuario}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(function(resposta) {
+        console.log("Resposta da rota generosFavoritos: ", resposta);
+
+        if (resposta.ok) {
+            resposta.json().then(function(dados) {
+                console.log("Gêneros favoritos recebidos do banco: ", dados);
+
+                // Seleciona a div onde ficam as tags
+                var divTags = document.querySelector(".tags-generos");
+                // document = página html inteira
+                // querySelector = 'captura' o primeiro elemento que bate com 'tags-generos'
+                // . = procurando uma class (igual no css); se fosse id, seria #
+                // 
+                
+                // Limpa as tags que estão fixas no HTML
+                divTags.innerHTML = ""; 
+
+                // Se o usuário ainda não tiver nenhum livro/avaliação/favorito
+                if (dados.length == 0) {
+                    divTags.innerHTML = "<span class='tag'>Nenhum gênero ainda</span>";
+                } else {
+                    // Percorre o array que veio do banco e cria uma tag real para cada um
+                    for (var i = 0; i < dados.length; i++) {
+                        var generoAtual = dados[i].genero;
+                        divTags.innerHTML += `<span class="tag">${generoAtual}</span>`;
+                    }
+                }
+            });
+        } else {
+            console.error("Houve um erro na API ao buscar os gêneros!");
+        }
+    })
+    .catch(function(erro) {
+        console.error(`#ERRO: ${erro}`);
+    });
+}
+
+    //chama a função para ela ser executada assim que a página carregar
+    window.onload = function () {
+        buscarFrasePerfil();
+        buscarMeusGeneros()
+    }; 
 </script>

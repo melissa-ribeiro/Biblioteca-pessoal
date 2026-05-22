@@ -19,7 +19,6 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha) {
     console.log("SENHA RECEBIDA NO MODEL:", senha);
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
@@ -96,12 +95,12 @@ function buscarKpis(idUsuario) {
 }
 
 // MEUS LIVROS
-// CADASTRAR LIVROS (SEM FAVORITOS || SEM AVALIACAO)
+// CADASTRAR LIVROS (SEM FAVORITOS OU SEM AVALIACAO)
 function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario) {
 
-    
+
     if (dt_conclusao != '') {
-         var insertSql = `
+        var insertSql = `
         INSERT INTO livros (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
         VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}', ${dt_conclusao ? `'${dt_conclusao}'` : 'NULL'} ,'${idUsuario}')
     `;
@@ -119,7 +118,7 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
 
 // INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
 function salvarFavorito(idUsuario, idLivro) {
-     var instrucaoSql = `
+    var instrucaoSql = `
         INSERT IGNORE INTO favoritos (usuario_id, livro_id)
         VALUES (${idUsuario}, ${idLivro});
     `;
@@ -188,6 +187,7 @@ function buscarLivroParaEditar(idLivro) {
 // Função 2 — atualiza os dados do livro
 function editarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idLivro) {
     var dataConclusao = (dt_conclusao && dt_conclusao != '') ? `'${dt_conclusao}'` : 'NULL';
+
     var instrucaoSql = `
         UPDATE livros 
         SET nome = '${titulo}',
@@ -198,6 +198,55 @@ function editarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idLivro) 
             data_conclusao = ${dataConclusao}
         WHERE id_livro = ${idLivro};
     `;
+    return database.executar(instrucaoSql);
+}
+
+// PÁGINA MEU PERFIL
+function buscarTotalLivros(idUsuario) { // recebe idusuario como parâmetro
+    var instrucaoSql = `SELECT COUNT(*) AS total
+    FROM livros 
+    WHERE status_leitura = 'concluido'
+    AND usuario_id = ${idUsuario};`
+
+    return database.executar(instrucaoSql); // executa no banco e retorna o resultado para o controller
+}
+
+function salvarPerfilLeitor(idUsuario, frase) { // recebe idUsuario e frase como parâmetro
+
+    var instrucaoSql = `INSERT INTO perfil_leitor 
+    (usuario_id, frase) VALUES (${idUsuario}, '${frase}')
+    ON DUPLICATE KEY UPDATE frase = '${frase}';` 
+    //  ON DUPLICATE KEY serve para evitar duplicidade caso o usuário já tenha um perfil salvo.
+
+    return database.executar(instrucaoSql); // executa no banco e retorna o resultado para o controller
+}
+
+function buscarPerfilLeitor(idUsuario) {  // recebe idusuario como parâmetro
+    var instrucaoSql = `SELECT frase FROM 
+    perfil_leitor 
+    WHERE usuario_id = ${idUsuario};` // Busca a frase salva na tabela perfil_leitor para aquele usuário
+
+    return database.executar(instrucaoSql); // executa no banco e retorna o resultado para o controller
+}
+
+function buscarGenerosFavoritos(idUsuario) {
+    // LEFT JOIN para garantir que, mesmo se o livro não tiver avaliação ou favorito, ainda seja considerado na contagem do gênero.
+    var instrucaoSql = `
+        SELECT 
+            l.genero,
+            (COUNT(f.livro_id) + COUNT(a.livro_id)) AS pontuacao
+        FROM livros l
+        LEFT JOIN favoritos f 
+            ON l.id_livro = f.livro_id AND f.usuario_id = l.usuario_id
+        LEFT JOIN avaliacao a 
+            ON l.id_livro = a.livro_id AND a.usuario_id = l.usuario_id
+        WHERE l.usuario_id = ${idUsuario}
+        GROUP BY l.genero
+        ORDER BY pontuacao DESC
+        LIMIT 4;
+    `;
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -214,5 +263,9 @@ module.exports = {
     salvarAvaliacao,
     buscarLivro,
     buscarLivroParaEditar,
-    editarLivro
+    editarLivro,
+    buscarTotalLivros,
+    salvarPerfilLeitor,
+    buscarPerfilLeitor,
+    buscarGenerosFavoritos
 };

@@ -358,6 +358,60 @@ function editarLivro(req, res) {
 }
 
 
+
+function buscarPerfilLeitor(req, res) { // chama a primeira função do model (quantos livros o usuário concluiu.))
+    var idUsuario = req.params.idUsuario; // pega o id do usuário da URL
+
+    usuarioModel.buscarTotalLivros(idUsuario)
+        .then(function(resultado) {
+            // O banco retorna um array. Pego o valor 'total' do primeiro objeto
+            var total = resultado[0].total; 
+
+            var frase = '';
+            // determinando a frase de acordo com a qntd de livros lidos
+            if (total >= 0 && total <= 2) {
+                frase = 'Leitor Iniciante';
+            } else if (total >= 3 && total <= 9) {
+                frase = 'Leitor Regular';
+            } else if (total >= 10 && total <= 19) {
+                frase = 'Leitor Voraz';
+            } else {
+                frase = 'Devorador de Livros';
+            }
+
+            return usuarioModel.salvarPerfilLeitor(idUsuario, frase); // chama a segunda função do model (salva a frase)
+            // return necessário para passar o resultado dessa operação para o próximo .then DEPOIS que o banco terminar de salvar a informação.
+        })
+        .then(function() {
+            return usuarioModel.buscarPerfilLeitor(idUsuario);  
+            //chama a terceira função para buscar a frase atualizada 
+        })
+        .then(function(perfil) {
+            res.status(200).json(perfil); 
+            
+        })
+        .catch(function(erro) {
+            // Se QUALQUER erro acontecer em qualquer um dos passos acima, ele cai aqui
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+// BUSCAR GÊNEROS FAVORITOS
+function buscarGenerosFavoritos(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    usuarioModel.buscarGenerosFavoritos(idUsuario)
+        .then(function(resultado) {
+            // Aqui o banco vai devolver: [{genero: 'Fantasia'}, {genero: 'Romance'}]
+            res.status(200).json(resultado);
+        })
+        .catch(function(erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -368,5 +422,7 @@ module.exports = {
     salvarLivro,
     buscarLivro,
     buscarLivroParaEditar,
-    editarLivro
+    editarLivro,
+    buscarPerfilLeitor,
+    buscarGenerosFavoritos
 }
