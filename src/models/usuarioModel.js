@@ -1,6 +1,7 @@
 var database = require("../database/config")
 
-function autenticar(email, senha) {
+// FUNÇÃO LOGIN
+function autenticar(email, senha) { // recebe email e senha como parâmetros
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucaoSql = `
     SELECT 
@@ -18,7 +19,7 @@ function autenticar(email, senha) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
+// FUNÇÃO CADASTRO
 function cadastrar(nome, email, senha) {
     console.log("SENHA RECEBIDA NO MODEL:", senha);
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
@@ -30,8 +31,10 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucaoSql);
 }
 
+// FUNÇÃO ONBOARDING
 function onboarding(nickname, pronome, avatar, idUsuario) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nickname, pronome, avatar);
+    
     // PRIMEIRO O UPDATE
     var instrucaoUpdate = `
     UPDATE usuario 
@@ -39,9 +42,12 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
         nickname = '${nickname}',
         pronome = '${pronome}',
         primeiro_acesso = 0
-    WHERE id_usuario = ${idUsuario};
-`;
-    console.log("Executando a instrução SQL: \n" + instrucaoUpdate);
+    WHERE id_usuario = ${idUsuario};`;
+    /*primeiro_acesso = 0; marca que o onboarding foi concluído.
+    Na próxima vez que o usuário logar, o sistema sabe que não 
+    precisa mostrar o onboarding de novo.*/
+ 
+ console.log("Executando a instrução SQL: \n" + instrucaoUpdate);
 
     return database.executar(instrucaoUpdate).then(() => {
         // SELECT PARA RETORNAR DADOS ATUALIZADOS
@@ -51,7 +57,7 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
     avatar
     FROM usuario 
     WHERE id_usuario = ${idUsuario}
-    `;
+    `; 
         console.log("Executando a instrução SQL: \n" + instrucaoSelect);
         return database.executar(instrucaoSelect);
     });
@@ -60,6 +66,8 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
 }
 
 //GRÁFICOS
+
+// Gráfico pizza
 function buscarGenerosMaisLidos(idUsuario) {
     var instrucaoSql = `
     SELECT genero, COUNT(*) AS quantidade
@@ -70,17 +78,20 @@ function buscarGenerosMaisLidos(idUsuario) {
     GROUP BY genero;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+//gráfico linha
 function buscarLivrosLidosMes(idUsuario) {
     var instrucaoSql = `
     SELECT MONTH(data_conclusao) AS mes, COUNT(*) AS quantidade
     FROM livros
     WHERE usuario_id = ${idUsuario}
     AND status_leitura = 'concluido'
+    AND YEAR(data_conclusao) = YEAR(CURDATE())
     GROUP BY MONTH(data_conclusao)
     ORDER BY mes;
-    `;
+    `; // busca quantos livros foram concluídos em cada mês do ano atual (YEAR CURDATE)
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -89,7 +100,7 @@ function buscarKpis(idUsuario) {
     var instrucaoSql = `
         SELECT * FROM vw_kpis
         WHERE usuario_id = ${idUsuario};
-        `;
+        `; // view!
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -97,8 +108,6 @@ function buscarKpis(idUsuario) {
 // MEUS LIVROS
 // CADASTRAR LIVROS (SEM FAVORITOS OU SEM AVALIACAO)
 function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario) {
-
-
     if (dt_conclusao != '') {
         var insertSql = `
         INSERT INTO livros (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
@@ -110,7 +119,7 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
         var insertSql = `
         INSERT INTO livros (nome, autor, genero, paginas, status_leitura, usuario_id)
         VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}','${idUsuario}')
-    `;
+    `; // Se a data está vazia, faz um INSERT sem a coluna data_conclusao
         console.log("Executando a instrução SQL: \n" + insertSql);
         return database.executar(insertSql);
     }
@@ -118,6 +127,7 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
 
 // INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
 function salvarFavorito(idUsuario, idLivro) {
+    // INSERT IGNORE = se já existir um registro com a mesma chave primária, ignora silenciosamente em vez de dar erro.
     var instrucaoSql = `
         INSERT IGNORE INTO favoritos (usuario_id, livro_id)
         VALUES (${idUsuario}, ${idLivro});

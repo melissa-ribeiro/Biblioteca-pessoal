@@ -331,10 +331,12 @@
             "Ler reduz o estresse em até 68%, segundo estudos."
         ]; // vetor com fatos sobre leitura
 
-        let sorteio = Math.floor(Math.random() * fatos.length); /* Função para gerar números aleatórios de acordo com
-                                                                  as ocorrências do vetor*/      
+        let sorteio = Math.floor(Math.random() * fatos.length); 
+        /* Função para gerar números aleatórios de acordo com
+        as ocorrências do vetor*/      
 
         document.getElementById('res-fato').innerHTML = fatos[sorteio];
         document.getElementById('lampada').style.display = 'none';
     }
+    
 </script>

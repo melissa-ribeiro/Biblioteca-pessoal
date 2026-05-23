@@ -40,7 +40,7 @@ router.post("/cadastrarLivros/:idUsuario", function(req,res){
     usuarioController.salvarLivro(req,res)
 })
 
-// BUSCANDO LIVROS CADATSRADOS 
+// BUSCANDO LIVROS CADASTRADOS 
 router.get("/listarLivros/:idUsuario", function(req,res){
     usuarioController.buscarLivro(req,res)
 })

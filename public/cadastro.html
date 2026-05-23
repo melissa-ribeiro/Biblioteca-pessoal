@@ -37,20 +37,21 @@
         Email: <br>
         <input id="ipt_email" type="email" placeholder="Digite seu Email"> <br>
 
-        Crie uma senha:<br>
+        Crie uma senha:
         <div class="senha-container">
           <input id="ipt_senha" type="password" placeholder="Digite uma senha">
           <button type="button" id="btnSenha" class="btn-olho" onclick="mostrarSenha()">
             Mostrar
           </button>
-        </div> 
+        </div>
 
         Confirme sua senha:
-        <div class="Confirmarsenha-container">
+        <div class="senha-container">
           <input id="ipt_confirmarsenha" type="password" placeholder="Confirme sua senha">
           <button type="button" id="btnConfSenha" class="btn-olho" onclick="mostrarSenha2()">
-          Mostrar
-          </button>  <br>
+            Mostrar
+          </button>
+        </div>
 
         <button onclick="Cadastrar()" id="bntCadastrar">Cadastrar</button> <br><br>
 
@@ -79,7 +80,7 @@
 
   function Cadastrar() {
 
-   
+
     var nomeVar = ipt_nome.value;
     var emailVar = ipt_email.value;
     var senhaVar = ipt_senha.value;
@@ -90,7 +91,7 @@
     if (
       nomeVar == "" ||
       emailVar == "" ||
-      senhaVar == "" 
+      senhaVar == ""
 
     ) {
 
@@ -102,7 +103,8 @@
       alert("Insira seu nome corretamente.")
 
     } else if (
-      emailVar.length == 0 || emailVar.length < 3 || !emailVar.includes('@')
+      emailVar.length == 0 || emailVar.length < 3 ||
+      !emailVar.includes('@') || !emailVar.includes('.com')
     ) {
 
       alert("Insira seu email corretamente.")
@@ -111,7 +113,7 @@
     ) {
 
       alert("Crie uma senha com 6 digitos ou mais.")
-    }  else {
+    } else {
 
       // Enviando o valor da nova input
       fetch("/usuarios/cadastrar", {
@@ -120,7 +122,7 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-         
+
           nomeServer: nomeVar,
           emailServer: emailVar,
           senhaServer: senhaVar,
@@ -155,13 +157,13 @@
   function mostrarSenha() {
     if (ipt_senha.type == "password") {
 
-        ipt_senha.type = "text";
-        btnSenha.innerHTML = "Ocultar";
+      ipt_senha.type = "text";
+      btnSenha.innerHTML = "Ocultar";
 
     } else {
 
-        ipt_senha.type = "password";
-        btnSenha.innerHTML = "Mostrar";
+      ipt_senha.type = "password";
+      btnSenha.innerHTML = "Mostrar";
 
     }
   }
@@ -169,13 +171,13 @@
   function mostrarSenha2() {
     if (ipt_confirmarsenha.type == "password") {
 
-        ipt_confirmarsenha.type = "text";
-        btnConfSenha.innerHTML = "Ocultar";
+      ipt_confirmarsenha.type = "text";
+      btnConfSenha.innerHTML = "Ocultar";
 
     } else {
 
-        ipt_confirmarsenha.type = "password";
-        btnConfSenha.innerHTML = "Mostrar";
+      ipt_confirmarsenha.type = "password";
+      btnConfSenha.innerHTML = "Mostrar";
 
     }
   }

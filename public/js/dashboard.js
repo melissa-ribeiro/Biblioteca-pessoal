@@ -90,7 +90,7 @@ function plotarGraficoPizza() {
                     for (var i = 0; i < dadosDoBanco.length; i++) {
                         var registro = dadosDoBanco[i];
                         labelsGerais.push(registro.genero);
-                        dadosGerais.push(registro.quantidade);
+                        dadosGerais.push(registro.quantidade/labelsGerais * 100);
                     }
 
                     // Renderiza o gráfico 
