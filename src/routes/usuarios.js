@@ -19,6 +19,7 @@ router.post("/onboarding", function (req, res) {
     usuarioController.onboarding(req, res);
 });
 
+// DASHBOARD:
 // BUSCAR GENEROS LIDOS DO USUÁRIO
 router.get("/generos/:idUsuario", function (req, res) {
     usuarioController.buscarGenerosMaisLidos(req, res);
@@ -34,7 +35,7 @@ router.get("/kpis/:idUsuario", function(req,res) {
     usuarioController.buscarKpis(req,res)
 })  
 
-
+// MEUS LIVROS
 //RECEBENDO LIVROS CADASTRADOS
 router.post("/cadastrarLivros/:idUsuario", function(req,res){
     usuarioController.salvarLivro(req,res)

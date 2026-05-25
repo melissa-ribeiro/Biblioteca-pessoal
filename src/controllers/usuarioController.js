@@ -338,7 +338,8 @@ function editarLivro(req, res) {
                 //Se avaliou, INSERT em avaliacao
 
                 if (avaliacao) {
-                    return usuarioModel.salvarAvaliacao(idUsuario, idLivro, avaliacao); // se avaliou, faz insert ON DUPLICATE KEY UPDATE  ()
+                    return usuarioModel.salvarAvaliacao(idUsuario, idLivro, avaliacao);
+                     // se avaliou, faz insert ON DUPLICATE KEY UPDATE  ()
                 }
             })
             .then(function () {

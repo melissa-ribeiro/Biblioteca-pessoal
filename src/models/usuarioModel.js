@@ -25,8 +25,10 @@ function cadastrar(nome, email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
 
     var instrucaoSql = `
-        INSERT INTO usuario (nome,email, senha) VALUES ('${nome}','${email}',  sha2('${senha}', 256));
+        INSERT INTO usuario (nome,email, senha) VALUES
+        ('${nome}','${email}',  sha2('${senha}', 256));
     `;
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -34,7 +36,7 @@ function cadastrar(nome, email, senha) {
 // FUNÇÃO ONBOARDING
 function onboarding(nickname, pronome, avatar, idUsuario) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nickname, pronome, avatar);
-    
+
     // PRIMEIRO O UPDATE
     var instrucaoUpdate = `
     UPDATE usuario 
@@ -46,8 +48,8 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
     /*primeiro_acesso = 0; marca que o onboarding foi concluído.
     Na próxima vez que o usuário logar, o sistema sabe que não 
     precisa mostrar o onboarding de novo.*/
- 
- console.log("Executando a instrução SQL: \n" + instrucaoUpdate);
+
+    console.log("Executando a instrução SQL: \n" + instrucaoUpdate);
 
     return database.executar(instrucaoUpdate).then(() => {
         // SELECT PARA RETORNAR DADOS ATUALIZADOS
@@ -57,7 +59,7 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
     avatar
     FROM usuario 
     WHERE id_usuario = ${idUsuario}
-    `; 
+    `;
         console.log("Executando a instrução SQL: \n" + instrucaoSelect);
         return database.executar(instrucaoSelect);
     });
@@ -69,15 +71,18 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
 
 // Gráfico pizza
 function buscarGenerosMaisLidos(idUsuario) {
+    // LEFT JOIN para garantir que, mesmo se o livro não tiver avaliação ou favorito, ainda seja considerado na contagem do gênero.
     var instrucaoSql = `
-    SELECT genero, COUNT(*) AS quantidade
+        SELECT genero, COUNT(*) AS quantidade
     FROM livros
-    JOIN usuario 
-    ON id_usuario = usuario_id
     WHERE usuario_id = ${idUsuario}
-    GROUP BY genero;
+    AND 
+    status_leitura = 'concluido'
+    GROUP BY genero
+    ORDER BY quantidade DESC
+    LIMIT 4;
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -96,11 +101,12 @@ function buscarLivrosLidosMes(idUsuario) {
     return database.executar(instrucaoSql);
 }
 //KPIs
+
 function buscarKpis(idUsuario) {
     var instrucaoSql = `
         SELECT * FROM vw_kpis
         WHERE usuario_id = ${idUsuario};
-        `; // view!
+        `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -108,10 +114,13 @@ function buscarKpis(idUsuario) {
 // MEUS LIVROS
 // CADASTRAR LIVROS (SEM FAVORITOS OU SEM AVALIACAO)
 function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario) {
+
     if (dt_conclusao != '') {
         var insertSql = `
-        INSERT INTO livros (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
-        VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}', ${dt_conclusao ? `'${dt_conclusao}'` : 'NULL'} ,'${idUsuario}')
+        INSERT INTO livros 
+        (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
+        VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}',
+        ${dt_conclusao ? `'${dt_conclusao}'` : 'NULL'} ,'${idUsuario}')
     `;
         console.log("Executando a instrução SQL: \n" + insertSql);
         return database.executar(insertSql);
@@ -127,7 +136,9 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
 
 // INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
 function salvarFavorito(idUsuario, idLivro) {
-    // INSERT IGNORE = se já existir um registro com a mesma chave primária, ignora silenciosamente em vez de dar erro.
+    // INSERT IGNORE = se já existir um registro 
+    // com a mesma chave primária,
+    //  ignora silenciosamente em vez de dar erro.
     var instrucaoSql = `
         INSERT IGNORE INTO favoritos (usuario_id, livro_id)
         VALUES (${idUsuario}, ${idLivro});
@@ -152,7 +163,9 @@ function salvarAvaliacao(idUsuario, idLivro, avaliacao) {
         INSERT INTO avaliacao (usuario_id, livro_id, estrelas)
         VALUES (${idUsuario}, ${idLivro}, ${avaliacao})
         ON DUPLICATE KEY UPDATE estrelas = ${avaliacao}; 
-     `; // DUPLICATE KEY serve pra se já existir uma avaliação para esse usuário e livro, ATUALIZA as estrelas em vez de dar erro
+     `; // DUPLICATE KEY serve pra se já existir uma avaliação
+     //  para esse usuário e livro, ATUALIZA as estrelas 
+     // em vez de dar erro
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -225,7 +238,7 @@ function salvarPerfilLeitor(idUsuario, frase) { // recebe idUsuario e frase como
 
     var instrucaoSql = `INSERT INTO perfil_leitor 
     (usuario_id, frase) VALUES (${idUsuario}, '${frase}')
-    ON DUPLICATE KEY UPDATE frase = '${frase}';` 
+    ON DUPLICATE KEY UPDATE frase = '${frase}';`
     //  ON DUPLICATE KEY serve para evitar duplicidade caso o usuário já tenha um perfil salvo.
 
     return database.executar(instrucaoSql); // executa no banco e retorna o resultado para o controller
@@ -240,7 +253,10 @@ function buscarPerfilLeitor(idUsuario) {  // recebe idusuario como parâmetro
 }
 
 function buscarGenerosFavoritos(idUsuario) {
-    // LEFT JOIN para garantir que, mesmo se o livro não tiver avaliação ou favorito, ainda seja considerado na contagem do gênero.
+
+    // LEFT JOIN para garantir que, 
+    // mesmo se o livro não tiver avaliação ou favorito,
+    //  ainda seja considerado na contagem do gênero.
     var instrucaoSql = `
         SELECT 
             l.genero,
@@ -255,7 +271,7 @@ function buscarGenerosFavoritos(idUsuario) {
         ORDER BY pontuacao DESC
         LIMIT 4;
     `;
-    
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }

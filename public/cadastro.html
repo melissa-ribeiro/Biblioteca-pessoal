@@ -84,6 +84,7 @@
     var nomeVar = ipt_nome.value;
     var emailVar = ipt_email.value;
     var senhaVar = ipt_senha.value;
+    var confirmarSenhaVar = ipt_confirmarsenha.value;
 
 
 
@@ -97,22 +98,22 @@
 
       alert("Preencha todos os campos corretamente!");
     } else if (
-      nomeVar.length == 0 || nomeVar.length < 3
+      nomeVar.length < 3
     ) {
-
       alert("Insira seu nome corretamente.")
 
     } else if (
-      emailVar.length == 0 || emailVar.length < 3 ||
-      !emailVar.includes('@') || !emailVar.includes('.com')
+      !emailVar.includes('@') || !emailVar.includes('.')
     ) {
-
       alert("Insira seu email corretamente.")
     } else if (
       senhaVar.length < 6
     ) {
-
       alert("Crie uma senha com 6 digitos ou mais.")
+    } else if (
+      senhaVar != confirmarSenhaVar
+    ) {
+      alert("As senhas devem ser iguais")
     } else {
 
       // Enviando o valor da nova input

@@ -299,9 +299,10 @@
 
     function Gerar(estado) {
 
+        // pega o id do elemento que vai mostrar a imagem
         const campoMensagem = document.getElementById('res-mood');
+        // varia de acordo com os emojis selecionados
         let texto = '';
-
         if (estado == 'relax') {
             texto = "Respire fundo... Hoje pede um café, uma manta e uma poesia leve ou crônicas do dia a dia. ☁️";
         }
@@ -317,7 +318,6 @@
         if (estado == 'fantasy') {
             texto = "Abra o portal! Suas leituras de hoje envolvem dragões, reinos distantes e magias proibidas. ✨";
         }
-
         campoMensagem.innerHTML = texto; // Mostra mensagem
     }
 
