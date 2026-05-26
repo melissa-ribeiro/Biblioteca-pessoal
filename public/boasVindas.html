@@ -83,6 +83,7 @@
 </html>
 <script>
 
+    //guarda qual avatar o usuário escolheu
     var avatarEscolhido = "";
 
     function selecionarAvatar(numero) { 
@@ -90,14 +91,18 @@
 
         avatarEscolhido = numero; 
 
+        // seleciona as imagens dentro da class "avatares"
         var listaAvatares = document.querySelectorAll(".avatares img");
 
+        //para cada avatar, remova a classe "avatar-selecionado"
         listaAvatares.forEach(function (img) { 
             img.classList.remove("avatar-selecionado");
-        });
+        }); // garante que apenas um avatar fique selecionado por vez
 
         document
+            // pegao id do avatar selecionado 
             .getElementById(`avatar${numero}`)
+            //deixa a borda com cor
             .classList.add("avatar-selecionado");
 
     }

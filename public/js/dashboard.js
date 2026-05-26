@@ -135,7 +135,17 @@ function plotarGraficoPizza() {
                         },
                         options: {
                             responsive: true, // se redimensiona se a janela muda de tamanho
-                            maintainAspectRatio: false // usa toda a altura disponivel do container
+                            maintainAspectRatio: false, // usa toda a altura disponivel do container
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context){
+                                            // nome do gênero         valor inserido
+                                            return context.label + ':' + context.raw + '%'
+                                        }
+                                    }
+                                }
+                            }
                         }
                     });
                 });
