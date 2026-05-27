@@ -27,10 +27,15 @@
                 <span>Sobre nós</span>
             </a>
 
+            <a href="#interacao" class="sobreNos">
+                    <span>Divirta-se</span>
+                </a>
+
             <div class="leitura">
                 <a href="#Beneficios" class="Beneficios2">
                     <span>Impacto da leitura</span>
                 </a>
+
 
                 <div class="nav">
                     <a href="./login.html">
@@ -128,7 +133,7 @@
     <div class="linhaSuave"></div>
 
     <!--SEÇÃO INTERAÇÃO-->
-    <section class="interacao">
+    <section id="interacao" class="interacao">
         <div class="cards">
 
             <div id="misteriousbook">
@@ -222,7 +227,7 @@
     quoteText.innerHTML = `${quotes[i]}` /*mostrar o primeiro quote quando a página carrega*/
 
     /*Quotes dinamicos:*/
-    setInterval(() => { 
+    setInterval(() => {
         i++;
 
         if (i >= quotes.length) {
@@ -285,11 +290,11 @@
     })
 
     function Aleatorio() {
-        var aleatorio = Math.floor(Math.random() * books.length); 
+        var aleatorio = Math.floor(Math.random() * books.length);
         /*Fórmula para gerar números inteiros aleatórios
          de acordo com a quantidade de ocorrências do vetor*/
-        
-        var livro = books[aleatorio]; 
+
+        var livro = books[aleatorio];
 
         book.innerHTML = `<h2>${livro.titulo}</h2>
             <h3>${livro.autor}</h3>
@@ -331,12 +336,12 @@
             "Ler reduz o estresse em até 68%, segundo estudos."
         ]; // vetor com fatos sobre leitura
 
-        let sorteio = Math.floor(Math.random() * fatos.length); 
+        let sorteio = Math.floor(Math.random() * fatos.length);
         /* Função para gerar números aleatórios de acordo com
-        as ocorrências do vetor*/      
+        as ocorrências do vetor*/
 
         document.getElementById('res-fato').innerHTML = fatos[sorteio];
         document.getElementById('lampada').style.display = 'none';
     }
-    
+
 </script>
