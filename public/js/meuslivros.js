@@ -1,7 +1,7 @@
 function listarLivros() {
     var idUsuario = sessionStorage.ID_USUARIO;
 
-    fetch(`/usuarios/listarLivros/${idUsuario}`)
+    fetch(`/usuarios/listarLivros/${idUsuario}`) // requisição GET pq busca os livros
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(function (livros) {
@@ -20,16 +20,26 @@ function listarLivros() {
                                 estrelas += '★'; // vai adiciondo estrela até a quantidade da avaliação
                             }
                         } else {
-                            estrelas = '-'; // estrela fica  nulo se não tiver avaliação
+                            estrelas = '-'; // estrela fica  nulo (-) se não tiver avaliação
                         }
 
                         // formata a data para formato br
                         var data = livro.dt_conclusao
-                            ? new Date(livro.dt_conclusao).toLocaleDateString('pt-BR') : '-'; // se não tem data mostra -
-                        // codição  ? se verdadeiro : se falso (operadores ternários)
+
+                        if(livro.dt_conclusao) {
+                           data = new Date(livro.dt_conclusao).toLocaleDateString('pt-BR')
+                        } else {
+                            data = '-'
+                        }
+
 
                         // favorito
-                        var favorito = livro.favorito == 1 ? '★' : '☆'; // é valores boleanos, se for 1 estrela cheia
+                        var favorito;
+                        if (livro.favorito == 1) {
+                            favorito = '★';
+                        } else {
+                            favorito = '☆';
+                        }
 
                         // cria a linha
                         var linha = `

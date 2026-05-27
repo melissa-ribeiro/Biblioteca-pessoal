@@ -73,7 +73,7 @@ function onboarding(nickname, pronome, avatar, idUsuario) {
 function buscarGenerosMaisLidos(idUsuario) {
     // LEFT JOIN para garantir que, mesmo se o livro não tiver avaliação ou favorito, ainda seja considerado na contagem do gênero.
     var instrucaoSql = `
-        SELECT genero, COUNT(*) AS quantidade
+    SELECT genero, COUNT(*) AS quantidade
     FROM livros
     WHERE usuario_id = ${idUsuario}
     AND 
@@ -120,7 +120,7 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
         INSERT INTO livros 
         (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
         VALUES ('${titulo}','${autor}','${genero}','${pages}','${stts}',
-        ${dt_conclusao ? `'${dt_conclusao}'` : 'NULL'} ,'${idUsuario}')
+        '${dt_conclusao}' ,'${idUsuario}')
     `;
         console.log("Executando a instrução SQL: \n" + insertSql);
         return database.executar(insertSql);
@@ -136,11 +136,8 @@ function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario
 
 // INSERIR FAVORITO,SE LIVRO JÁ CONCLUÍDO
 function salvarFavorito(idUsuario, idLivro) {
-    // INSERT IGNORE = se já existir um registro 
-    // com a mesma chave primária,
-    //  ignora silenciosamente em vez de dar erro.
     var instrucaoSql = `
-        INSERT IGNORE INTO favoritos (usuario_id, livro_id)
+        INSERT INTO favoritos (usuario_id, livro_id)
         VALUES (${idUsuario}, ${idLivro});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -164,8 +161,7 @@ function salvarAvaliacao(idUsuario, idLivro, avaliacao) {
         VALUES (${idUsuario}, ${idLivro}, ${avaliacao})
         ON DUPLICATE KEY UPDATE estrelas = ${avaliacao}; 
      `; // DUPLICATE KEY serve pra se já existir uma avaliação
-     //  para esse usuário e livro, ATUALIZA as estrelas 
-     // em vez de dar erro
+    //  para esse usuário e livro, ATUALIZA as estrelas 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -218,7 +214,7 @@ function editarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idLivro) 
             genero = '${genero}',
             paginas = '${pages}',
             status_leitura = '${stts}',
-            data_conclusao = ${dataConclusao}
+            data_conclusao = '${dt_conclusao}'
         WHERE id_livro = ${idLivro};
     `;
     return database.executar(instrucaoSql);
