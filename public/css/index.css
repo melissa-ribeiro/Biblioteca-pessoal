@@ -35,10 +35,10 @@ html {
 .menuDireita {
     display: flex;
     align-items: center;
-    gap: 80px; 
+    gap: 80px;
 }
 
-.menuDireita a{
+.menuDireita a {
     text-decoration: none;
 }
 
@@ -59,7 +59,7 @@ html {
 .leitura {
     display: flex;
     align-items: center;
-    gap: 100px; 
+    gap: 100px;
 }
 
 .Beneficios2:hover {
@@ -69,7 +69,7 @@ html {
 
 
 .header {
-    background-color: #A396E9; 
+    background-color: #A396E9;
     padding: 10px 50px;
     display: flex;
     justify-content: space-between;
@@ -93,6 +93,7 @@ html {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 #btnLogin:hover {
     background-color: #6E5CD6;
     transform: translateY(-2px);
@@ -111,17 +112,17 @@ html {
     background-position: center;
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     position: relative;
     overflow: hidden;
     margin-bottom: 0;
     padding-bottom: 0;
-    
+
 }
 
 .conteudo {
     max-width: 500px;
-    margin-left: 10%; 
+    margin-left: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -188,12 +189,13 @@ html {
 
     width: 400px;
 }
+
 .aspas {
     color: #6c63ff;
     font-size: 40px;
     font-weight: bold;
 
-  
+
     left: -25px;
     top: -10px;
 
@@ -210,8 +212,8 @@ html {
     margin-top: -10px;
     padding: 80px 20px;
     text-align: center;
-    background-color: #F8F9FF; 
-  
+    background-color: #F8F9FF;
+
 }
 
 .motivos h2 {
@@ -239,20 +241,23 @@ html {
     justify-content: center;
     padding: 80px 20px;
     background-color: #F8F9FF;
-    margin-top: -2px; 
+    margin-top: -2px;
 }
 
 /* CONTAINER DOS 3 CARDS */
 .interacao .cards {
     display: flex;
     justify-content: center;
-    align-items: stretch;  /*MESMA ALTURA*/
+    align-items: stretch;
+    /*MESMA ALTURA*/
     gap: 30px;
     max-width: 1200px;
 }
 
 /*(misteriousbook, mood, fact) */
-#misteriousbook, #mood, #fact {
+#misteriousbook,
+#mood,
+#fact {
     background-color: #fff;
     border: 1px solid #E0E0E0;
     border-radius: 20px;
@@ -266,33 +271,39 @@ html {
     justify-content: center;
     text-align: center;
     transition: all 0.4s ease;
-    cursor: default; 
+    cursor: default;
 }
 
 /* EFEITO HOVER CARDS */
-#misteriousbook:hover, #mood:hover, #fact:hover {
+#misteriousbook:hover,
+#mood:hover,
+#fact:hover {
     border-color: #8B78E6;
     box-shadow: 0 10px 30px rgba(139, 120, 230, 0.15);
     transform: translateY(-8px);
 }
 
 /* TÍTULOS DOS CARDS */
-#misteriousbook span, #mood span, #fact span {
+#misteriousbook span,
+#mood span,
+#fact span {
     margin-bottom: 25px;
     color: #4A338E;
     font-weight: 600;
     font-size: 20px;
     display: block;
 }
+
 /*IMAGEM DO PRESENTE*/
 #presente {
     width: 180px;
     cursor: pointer;
     transition: 0.4s;
 }
+
 #presente:hover {
     filter: drop-shadow(0 0 10px #9f4dcb);
-    transform: scale(1.1) rotate(5deg); 
+    transform: scale(1.1) rotate(5deg);
 }
 
 .misteriousbook span {
@@ -304,8 +315,8 @@ html {
 
 /*MENSAGEM DO LIVRO MISTERIOSO*/
 #book {
-    display: none; 
-    width: 100%;   
+    display: none;
+    width: 100%;
     text-align: center;
     animation: aparecerSuave 0.6s ease;
 }
@@ -333,8 +344,9 @@ html {
     cursor: pointer;
     transition: filter 0.3s ease, transform 0.3s ease;
 }
+
 .lamp img:hover {
-    filter: drop-shadow(0 0 10px #FFD700); 
+    filter: drop-shadow(0 0 10px #FFD700);
     transform: rotate(5deg);
 }
 
@@ -360,7 +372,7 @@ html {
 .Beneficios {
     padding: 80px 20px;
     text-align: center;
-    background-color: #F8F9FF; 
+    background-color: #F8F9FF;
 }
 
 
@@ -389,22 +401,26 @@ html {
     flex-wrap: wrap;
 }
 
-.card1, .card2, .card3 {
-    background-color: #fff; 
+.card1,
+.card2,
+.card3 {
+    background-color: #fff;
     border: 1px solid #E0E0E0;
     padding: 40px 20px;
     border-radius: 15px;
     width: 320px;
-    box-shadow: none; 
+    box-shadow: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 
 /*EFEITO HOVER*/
-.card1:hover, .card2:hover, .card3:hover {
+.card1:hover,
+.card2:hover,
+.card3:hover {
     transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .card1 h3,
@@ -421,11 +437,39 @@ html {
     line-height: 1.6;
 }
 
-/*footer*/
-footer {
+/* CONTAINER DO FOOTER */
+.meu-footer {
     background-color: #dcd7f8;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
     color: #4A338E;
+    font-size: 14px;
+    min-height: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* CAIXA DOS ÍCONES*/
+.footer-icones {
+    position: absolute;
+    right: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-icones a {
+    color: #9581dc;
+    font-size: 40px;
+    margin-left: 30px;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.footer-icones a:hover {
+    color: #4A338E;
+    transform: translateY(-1px) scale(1.1);
 }
