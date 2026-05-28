@@ -219,6 +219,7 @@ function salvarLivro(req, res) {
             .then(
                 function (resultado) {
                     var idLivro = resultado.insertId; // id gerado pelo INSERT
+                    console.log(resultado) // só pra eu ver oq o banco gera e ver o insertId
                     if (favorito) {
                         // se stts = concluído; inserir em favorito
                         return usuarioModel.salvarFavorito(idUsuario, idLivro)

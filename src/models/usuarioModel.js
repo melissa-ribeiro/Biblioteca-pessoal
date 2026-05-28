@@ -115,7 +115,7 @@ function buscarKpis(idUsuario) {
 // CADASTRAR LIVROS (SEM FAVORITOS OU SEM AVALIACAO)
 function salvarLivro(titulo, autor, genero, pages, stts, dt_conclusao, idUsuario) {
 
-    if (dt_conclusao != '') {
+    if (dt_conclusao != null) {
         var insertSql = `
         INSERT INTO livros 
         (nome, autor, genero, paginas, status_leitura, data_conclusao, usuario_id)
