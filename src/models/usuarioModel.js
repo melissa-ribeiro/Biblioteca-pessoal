@@ -259,7 +259,7 @@ function buscarGenerosFavoritos(idUsuario) {
             (COUNT(f.livro_id) + COUNT(a.livro_id)) AS pontuacao
         FROM livros l
         LEFT JOIN favoritos f 
-            ON l.id_livro = f.livro_id AND f.usuario_id = l.usuario_id
+            ON l.id_livro = f.livro_id AND f.usuario_id = l.usuario_id 
         LEFT JOIN avaliacao a 
             ON l.id_livro = a.livro_id AND a.usuario_id = l.usuario_id
         WHERE l.usuario_id = ${idUsuario}

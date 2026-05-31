@@ -105,6 +105,7 @@
                         sessionStorage.AVATAR_USUARIO = json.avatar;
 
                         setTimeout(function () {
+                            // se for primeiro acesso > vai para onboarding
                             if (json.primeiro_acesso == 1) {
 
                                 window.location = "./boasVindas.html";

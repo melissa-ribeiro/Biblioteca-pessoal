@@ -96,10 +96,11 @@ function plotarGraficoPizza() {
 
                     var total = 0;
                     // lê dadosDoBanco, pois veio preenchido do banco
+                    // for para ver quantas ocorrencias tem no json
                     for(var i = 0; i < dadosDoBanco.length;i ++){
                         total += dadosDoBanco[i].quantidade // lê do banco
                     }
-
+                    
                     // Vetores  que vão receber os dados reais do banco
                     var labelsGerais = []; // guardas os nomes dos gêneros
                     var dadosGerais = []; // guarda a porcentagem de livros concluídos
